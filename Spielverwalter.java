@@ -19,33 +19,51 @@ public class Spielverwalter   {
     }
 
     private void hauptschleife(){
+      for(int i=0;i<8;i++){
             //Zufallsposition für eine Dame
             int randomX = (int) (Math.random()*8)+1;
             int randomY = (int) (Math.random()*8)+1;
-            System.out.println("x:"+randomX+" "+"y:"+randomY);
-
-            feld[randomX][randomY] = 1;
-            checkDiagonal(feld, randomX, randomY);
-
-  
+      //      System.out.println("x:"+randomX+" "+"y:"+randomY);
+     
+            while(!checkDiagonal(feld, randomX, randomY)){
+                 //Zufallsposition für eine Dame
+               randomX = (int) (Math.random()*8)+1;
+               randomY = (int) (Math.random()*8)+1; 
+            }
+            feld[randomX][randomY]=1;
+            System.out.println("\nDamenanzahl:"+i);
+               //Ausgabe
+         int umbruchzaehler=0;
+         for(int y=1;y<9;y++){
+            for(int x=1;x<9;x++){       
+               if(umbruchzaehler%8==0){
+                     System.out.println("");
+               }
+                        System.out.print(" "+feld[x][y]);
+                        umbruchzaehler++;
+                     
+            }
+         }
+         }
+         
     }
 
-    private void checkDiagonal(int[][] feld,int x, int y) {
+    private boolean checkDiagonal(int[][] feld,int x, int y) {
      //oben rechts
      int startX = x;
      int startY = y;
 
      while(x!=8&&y!=1){
-     if(x<8){
-        x++;
-     }
+      if(x<8){
+         x++;
+      }
 
-     if(y>1){
-        y--;
-     }
-
-     feld[x][y] = 2;
-     
+      if(y>1){
+         y--;
+      }
+     if(feld[x][y]==1){
+      return false;
+    }
     }
 
     //oben links
@@ -53,16 +71,16 @@ public class Spielverwalter   {
      y = startY;
 
     while(x!=1&&y!=1){
-    if(x>1){
-       x--;
-    }
+      if(x>1){
+         x--;
+      }
 
-    if(y>1){
-       y--;
-    }
-
-    feld[x][y] = 2;
-    
+      if(y>1){
+         y--;
+      }
+       if(feld[x][y]==1){
+         return false;
+       }
    }
 
     //unten links
@@ -81,7 +99,9 @@ public class Spielverwalter   {
       y++;
    }
 
-   feld[x][y] = 2;
+   if(feld[x][y]==1){
+      return false;
+    }
   }
 
   //unten rechts
@@ -100,24 +120,13 @@ public class Spielverwalter   {
     y++;
  }
 
- feld[x][y] = 2;
+ if(feld[x][y]==1){
+   return false;
+ }
  
 }
 
-  
-
-    //Ausgabe
-    int umbruchzaehler=0;
-    for( y=1;y<9;y++){
-       for( x=1;x<9;x++){       
-           if(umbruchzaehler%8==0){
-               System.out.println("");
-           }
-                   System.out.print(" "+feld[x][y]);
-                   umbruchzaehler++;
-               
-       }
-   }
+   return true;
 
    }
 }
