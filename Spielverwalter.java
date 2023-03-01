@@ -19,17 +19,18 @@ public class Spielverwalter   {
     }
 
     private void hauptschleife(){
-      for(int i=0;i<8;i++){
+      for(int i=0;i<1;i++){
             //Zufallsposition für eine Dame
             int randomX = (int) (Math.random()*8)+1;
             int randomY = (int) (Math.random()*8)+1;
+            checkDiagonal(feld, randomX, randomY);
       //      System.out.println("x:"+randomX+" "+"y:"+randomY);
      
-            while(!checkDiagonal(feld, randomX, randomY)){
+         //   while(!checkDiagonal(feld, randomX, randomY)){
                  //Zufallsposition für eine Dame
                randomX = (int) (Math.random()*8)+1;
                randomY = (int) (Math.random()*8)+1; 
-            }
+          //  }
             feld[randomX][randomY]=1;
             System.out.println("\nDamenanzahl:"+i);
                //Ausgabe
@@ -48,8 +49,8 @@ public class Spielverwalter   {
          
     }
 
-    private boolean checkDiagonal(int[][] feld,int x, int y) {
-     //oben rechts
+    private void checkDiagonal(int[][] feld,int x, int y) {
+     //oben rechts 1
      int startX = x;
      int startY = y;
 
@@ -61,12 +62,12 @@ public class Spielverwalter   {
       if(y>1){
          y--;
       }
-     if(feld[x][y]==1){
-      return false;
+     if(feld[x][y]==0){
+      feld[x][y]=2;
     }
     }
 
-    //oben links
+    //oben links 2
      x = startX;
      y = startY;
 
@@ -78,12 +79,12 @@ public class Spielverwalter   {
       if(y>1){
          y--;
       }
-       if(feld[x][y]==1){
-         return false;
+      if(feld[x][y]==0){
+         feld[x][y]=2;
        }
    }
 
-    //unten links
+    //unten links 3
     x = startX;
     y = startY;
 
@@ -99,8 +100,8 @@ public class Spielverwalter   {
       y++;
    }
 
-   if(feld[x][y]==1){
-      return false;
+   if(feld[x][y]==0){
+      feld[x][y]=2;
     }
   }
 
@@ -120,13 +121,13 @@ public class Spielverwalter   {
     y++;
  }
 
- if(feld[x][y]==1){
-   return false;
+ if(feld[x][y]==0){
+   feld[x][y]=2;
  }
  
 }
 
-   return true;
+ //  return true;
 
    }
 }
