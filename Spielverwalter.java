@@ -13,43 +13,38 @@ public class Spielverwalter   {
                 feld[x][y]=0;
             }
        }
-      // System.out.println(feld[4][4]);
 
        hauptschleife(); 
     }
 
     private void hauptschleife(){
-      for(int i=0;i<1;i++){
+      for(int i=1;i<9;i++){
             //Zufallsposition für eine Dame
             int randomX = (int) (Math.random()*8)+1;
             int randomY = (int) (Math.random()*8)+1;
-            checkDiagonal(feld, randomX, randomY);
-      //      System.out.println("x:"+randomX+" "+"y:"+randomY);
-     
-         //   while(!checkDiagonal(feld, randomX, randomY)){
-                 //Zufallsposition für eine Dame
-               randomX = (int) (Math.random()*8)+1;
-               randomY = (int) (Math.random()*8)+1; 
-          //  }
-            feld[randomX][randomY]=1;
-            System.out.println("\nDamenanzahl:"+i);
-               //Ausgabe
-         int umbruchzaehler=0;
-         for(int y=1;y<9;y++){
-            for(int x=1;x<9;x++){       
-               if(umbruchzaehler%8==0){
-                     System.out.println("");
-               }
-                        System.out.print(" "+feld[x][y]);
-                        umbruchzaehler++;
-                     
-            }
-         }
-         }
-         
+
+          while(!checkDiagonal(feld, randomX, randomY)){
+            randomX = (int) (Math.random()*8)+1;
+            randomY = (int) (Math.random()*8)+1;
+          }
+          feld[randomX][randomY]=1;
+          System.out.println("\nFiguren auf dem Feld:"+ i);
+      }
+         //Ausgabe
+    int umbruchzaehler=0;
+    for(int y=1;y<9;y++){
+       for(int x=1;x<9;x++){       
+           if(umbruchzaehler%8==0){
+               System.out.println("");
+           }
+                   System.out.print(" "+feld[x][y]);
+                   umbruchzaehler++;
+               
+       }
+   }
     }
 
-    private void checkDiagonal(int[][] feld,int x, int y) {
+    private boolean checkDiagonal(int[][] feld,int x, int y) {
      //oben rechts 1
      int startX = x;
      int startY = y;
@@ -59,12 +54,14 @@ public class Spielverwalter   {
          x++;
       }
 
-      if(y>1){
-         y--;
-      }
-     if(feld[x][y]==0){
-      feld[x][y]=2;
-    }
+     if(y>1){
+        y--;
+     }
+
+     if(feld[x][y]==1){
+      return false;
+     }
+     
     }
 
     //oben links 2
@@ -76,12 +73,14 @@ public class Spielverwalter   {
          x--;
       }
 
-      if(y>1){
-         y--;
-      }
-      if(feld[x][y]==0){
-         feld[x][y]=2;
-       }
+    if(y>1){
+       y--;
+    }
+
+    if(feld[x][y]==1){
+     return false;
+     }
+    
    }
 
     //unten links 3
@@ -100,12 +99,12 @@ public class Spielverwalter   {
       y++;
    }
 
-   if(feld[x][y]==0){
-      feld[x][y]=2;
-    }
+   if(feld[x][y]==1){
+      return false;
+     }
   }
 
-  //unten rechts
+  //unten rechts 4
   x = startX;
   y = startY;
 
@@ -121,13 +120,11 @@ public class Spielverwalter   {
     y++;
  }
 
- if(feld[x][y]==0){
-   feld[x][y]=2;
- }
+ if(feld[x][y]==1){
+   return false;
+  }
  
 }
-
- //  return true;
-
+   return true;
    }
 }
