@@ -21,6 +21,7 @@ public class Spielverwalter   {
     private void hauptschleife(){
         //while(!MyKeyListener.keyPressedESC()){ //Läuft solange bis Escape gedrückt wird
           int positionierteDamen=0;
+          int versuchszähler=0;
             while(positionierteDamen<8){
             //Zufallsposition für eine Dame
             int randomX = (int) (Math.random()*8)+1;
@@ -31,7 +32,7 @@ public class Spielverwalter   {
                 positionierteDamen++;
                 System.out.println("\n\nPositionierte Damen: "+positionierteDamen);
             }
-           
+            
        // }
          //Ausgabe
          int umbruchzaehler=0;
@@ -45,11 +46,17 @@ public class Spielverwalter   {
                     
             }
         }
+        System.out.println("");
+        versuchszähler++;
+        if(versuchszähler>1000){
+            System.out.println("\nEs gibt keine weitere Stellung mehr");
+            break;
+        }
       }
     }
 
     private boolean checkDiagonal(int[][] feld,int x, int y) {
-         boolean checkObenRechts=true,checkObenLinks=false,checkUntenRechts=false,checkUntenLinks=true;
+         boolean checkObenRechts=true,checkObenLinks=false,checkUntenRechts=false,checkUntenLinks=false;
         int startX = x;
         int startY = y;
         //nach oben rechts prüfen 1
@@ -153,14 +160,11 @@ public class Spielverwalter   {
             return false;
         }
 
-    
 
-        //Temporär
        if(checkObenRechts&&checkObenLinks&&checkUntenLinks&&checkUntenRechts){
         return true;
        }else{
         return false;
        }
     }
-
 }
