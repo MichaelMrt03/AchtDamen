@@ -3,7 +3,7 @@
 public class Spielverwalter   {
 
     int[][] feld; 
-    boolean checkObenRechts,checkObenLinks,checkUntenRechts,checkUntenLinks;
+   
     public Spielverwalter() {
        new MyKeyListener("Mein KeyListener");
         feld = new int[9][9]; //Damit man das 8*8 Feld mit 1 bis 8 darstellen kann
@@ -49,9 +49,10 @@ public class Spielverwalter   {
     }
 
     private boolean checkDiagonal(int[][] feld,int x, int y) {
+         boolean checkObenRechts=true,checkObenLinks=false,checkUntenRechts=false,checkUntenLinks=true;
         int startX = x;
         int startY = y;
-        //nach oben rechts prüfen
+        //nach oben rechts prüfen 1
       for(int i=0;i<8;i++){ // Acht mal, da ggf von (1/1) bis (8/8)
         if(x<8){
             x++;
@@ -71,7 +72,7 @@ public class Spielverwalter   {
         }
     }
 
-      //nach oben links prüfen
+      //nach oben links prüfen 2
         if(checkObenRechts){   
             x = startX;
             y = startY;  
@@ -90,7 +91,6 @@ public class Spielverwalter   {
                 }
 
                 if(feld[x][y]==1){
-                    System.out.println("FALSE");
                     return false;
                 }
             }
@@ -99,7 +99,7 @@ public class Spielverwalter   {
             return false;
         }
 
-        //nach unten links prüfen
+        //nach unten links prüfen 3
         if(checkObenLinks){  
             x = startX;
             y = startY;    
@@ -126,7 +126,7 @@ public class Spielverwalter   {
             return false;
         }
 
-        //nach unten rechts prüfen
+        //nach unten rechts prüfen 4
         if(checkUntenLinks){  
             x = startX;
             y = startY;    
