@@ -13,19 +13,22 @@ public class Spielverwalter   {
                 feld[x][y]=0;
             }
        }
-      // System.out.println(feld[4][4]);
 
        hauptschleife(); 
     }
 
     private void hauptschleife(){
-      for(int i=0;i<2;i++){
+      for(int i=1;i<9;i++){
             //Zufallsposition für eine Dame
             int randomX = (int) (Math.random()*8)+1;
             int randomY = (int) (Math.random()*8)+1;
 
-            feld[randomX][randomY] = 1;
-            checkDiagonal(feld, randomX, randomY);
+          while(!checkDiagonal(feld, randomX, randomY)){
+            randomX = (int) (Math.random()*8)+1;
+            randomY = (int) (Math.random()*8)+1;
+          }
+          feld[randomX][randomY]=1;
+          System.out.println("\nFiguren auf dem Feld:"+ i);
       }
          //Ausgabe
     int umbruchzaehler=0;
@@ -41,8 +44,8 @@ public class Spielverwalter   {
    }
     }
 
-    private void checkDiagonal(int[][] feld,int x, int y) {
-     //oben rechts
+    private boolean checkDiagonal(int[][] feld,int x, int y) {
+     //oben rechts 1
      int startX = x;
      int startY = y;
 
@@ -55,13 +58,13 @@ public class Spielverwalter   {
         y--;
      }
 
-     if(feld[x][y]==0){
-      feld[x][y]=2;
+     if(feld[x][y]==1){
+      return false;
      }
      
     }
 
-    //oben links
+    //oben links 2
      x = startX;
      y = startY;
 
@@ -74,13 +77,13 @@ public class Spielverwalter   {
        y--;
     }
 
-    if(feld[x][y]==0){
-      feld[x][y]=2;
+    if(feld[x][y]==1){
+     return false;
      }
     
    }
 
-    //unten links
+    //unten links 3
     x = startX;
     y = startY;
 
@@ -96,12 +99,12 @@ public class Spielverwalter   {
       y++;
    }
 
-   if(feld[x][y]==0){
-      feld[x][y]=2;
+   if(feld[x][y]==1){
+      return false;
      }
   }
 
-  //unten rechts
+  //unten rechts 4
   x = startX;
   y = startY;
 
@@ -117,15 +120,11 @@ public class Spielverwalter   {
     y++;
  }
 
- if(feld[x][y]==0){
-   feld[x][y]=2;
+ if(feld[x][y]==1){
+   return false;
   }
  
 }
-
-  
-
-    
-
+   return true;
    }
 }
