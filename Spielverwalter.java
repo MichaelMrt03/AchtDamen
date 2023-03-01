@@ -26,8 +26,9 @@ public class Spielverwalter   {
             //Zufallsposition für eine Dame
             int randomX = (int) (Math.random()*8)+1;
             int randomY = (int) (Math.random()*8)+1;
-
+    
             if(feld[randomX][randomY]==0&&checkDiagonal(feld,randomX,randomY)==true){
+                System.out.println("x: "+randomX+"\n"+"y: "+randomY);
                 feld[randomX][randomY]=1; 
                 positionierteDamen++;
                 System.out.println("\n\nPositionierte Damen: "+positionierteDamen);
@@ -36,8 +37,8 @@ public class Spielverwalter   {
        // }
          //Ausgabe
          int umbruchzaehler=0;
-         for(int x=1;x<9;x++){
-            for(int y=1;y<9;y++){       
+         for(int y=1;y<9;y++){
+            for(int x=1;x<9;x++){       
                 if(umbruchzaehler%8==0){
                     System.out.println("");
                 }
