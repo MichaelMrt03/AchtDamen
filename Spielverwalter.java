@@ -3,7 +3,7 @@
 public class Spielverwalter   {
 
     int[][] feld; 
-    boolean checkObenRechts,checkObenLinks;
+    boolean checkObenRechts,checkObenLinks,checkUntenRechts,checkUntenLinks;
     public Spielverwalter() {
        new MyKeyListener("Mein KeyListener");
         feld = new int[9][9]; //Damit man das 8*8 Feld mit 1 bis 8 darstellen kann
@@ -50,7 +50,7 @@ public class Spielverwalter   {
 
     private boolean checkDiagonal(int[][] feld,int x, int y) {
         //nach oben rechts prüfen
-      for(int i=0;i<8;i++){ // Acht mal, da ggf von (1/8) bis (8/1)
+      for(int i=0;i<8;i++){ // Acht mal, da ggf von (1/1) bis (8/8)
         if(x<8){
             x++;
             if(y<8){
@@ -69,34 +69,85 @@ public class Spielverwalter   {
         }
     }
 
-        if(checkObenRechts){
-               //nach oben rechts prüfen
-      for(int i=0;i<8;i++){ // Acht mal, da ggf von (1/8) bis (8/1)
-        if(x<8){
-            x++;
-            if(y<8){
-                y++;
-            }else{
-                //Rand erreicht in y
-                checkObenLinks=true;
-            }
-            }else{
-            //Rand erreicht in x
-            checkObenLinks=true;
-        }
+      //nach oben links prüfen
+        if(checkObenRechts){     
+            for(int i=0;i<8;i++){ // Acht mal, da ggf von (1/8) bis (8/1)
+                if(x<8){
+                    x++;
+                    if(y<8){
+                        y++;
+                    }else{
+                        //Rand erreicht in y
+                        checkObenLinks=true;
+                    }
+                    }else{
+                    //Rand erreicht in x
+                    checkObenLinks=true;
+                }
 
-        if(feld[x][y]==1){
-            return false;
-        }
-    }
+                if(feld[x][y]==1){
+                    return false;
+                }
+            }
         }else{
             //Wenn links false ist
             return false;
         }
 
+        //nach unten links prüfen
+        if(checkObenLinks){     
+            for(int i=0;i<8;i++){ // Acht mal, da ggf von (8/8) bis (1/1)
+                if(x<8){
+                    x--;
+                    if(y<8){
+                        y--;
+                    }else{
+                        //Rand erreicht in y
+                        checkUntenLinks=true;
+                    }
+                    }else{
+                    //Rand erreicht in x
+                    checkUntenLinks=true;
+                }
+
+                if(feld[x][y]==1){
+                    return false;
+                }
+            }
+        }else{
+            //Wenn links false ist
+            return false;
+        }
+
+        //nach unten rechts prüfen
+        if(checkUntenLinks){     
+            for(int i=0;i<8;i++){ // Acht mal, da ggf von (1/8) bis (8/1)
+                if(x<8){
+                    x++;
+                    if(y<8){
+                        y--;
+                    }else{
+                        //Rand erreicht in y
+                        checkUntenRechts=true;
+                    }
+                    }else{
+                    //Rand erreicht in x
+                    checkUntenRechts=true;
+                }
+
+                if(feld[x][y]==1){
+                    return false;
+                }
+            }
+        }else{
+            //Wenn links false ist
+            return false;
+        }
+
+    
 
         //Temporär
-       if(checkObenRechts&&checkObenLinks){
+       if(checkObenRechts&&checkObenLinks&&checkUntenLinks&&checkUntenRechts){
         return true;
        }else{
         return false;
