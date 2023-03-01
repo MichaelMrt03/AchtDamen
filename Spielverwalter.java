@@ -66,8 +66,8 @@ public class Spielverwalter   {
       for(int i=0;i<8;i++){ // Acht mal, da ggf von (1/1) bis (8/8)
         if(x<8){
             x++;
-            if(y<8){
-                y++;
+            if(y>1){
+                y--;
             }else{
                 //Rand erreicht in y
                 checkObenRechts=true;
@@ -89,8 +89,8 @@ public class Spielverwalter   {
             for(int i=0;i<8;i++){ // Acht mal, da ggf von (1/8) bis (8/1)
                 if(x>1){
                     x--;
-                    if(y<8){
-                        y++;
+                    if(y>1){
+                        y--;
                     }else{
                         //Rand erreicht in y
                         checkObenLinks=true;
@@ -116,8 +116,8 @@ public class Spielverwalter   {
             for(int i=0;i<8;i++){ // Acht mal, da ggf von (8/8) bis (1/1)
                 if(x>1){
                     x--;
-                    if(y>1){
-                        y--;
+                    if(y<8){
+                        y++;
                     }else{
                         //Rand erreicht in y
                         checkUntenLinks=true;
@@ -143,8 +143,8 @@ public class Spielverwalter   {
             for(int i=0;i<8;i++){ // Acht mal, da ggf von (1/8) bis (8/1)
                 if(x<8){
                     x++;
-                    if(y>1){
-                        y--;
+                    if(y<8){
+                        y++;
                     }else{
                         //Rand erreicht in y
                         checkUntenRechts=true;
