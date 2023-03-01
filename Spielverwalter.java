@@ -5,7 +5,7 @@ public class Spielverwalter   {
     int[][] feld; 
    
     public Spielverwalter() {
-       new MyKeyListener("Mein KeyListener");
+      // new MyKeyListener("Mein KeyListener");
         feld = new int[9][9]; //Damit man das 8*8 Feld mit 1 bis 8 darstellen kann
        //Füllt das Feld mit Nullen
         for(int x=1;x<9;x++){
