@@ -49,6 +49,8 @@ public class Spielverwalter   {
     }
 
     private boolean checkDiagonal(int[][] feld,int x, int y) {
+        int startX = x;
+        int startY = y;
         //nach oben rechts prüfen
       for(int i=0;i<8;i++){ // Acht mal, da ggf von (1/1) bis (8/8)
         if(x<8){
@@ -70,10 +72,12 @@ public class Spielverwalter   {
     }
 
       //nach oben links prüfen
-        if(checkObenRechts){     
+        if(checkObenRechts){   
+            x = startX;
+            y = startY;  
             for(int i=0;i<8;i++){ // Acht mal, da ggf von (1/8) bis (8/1)
-                if(x<8){
-                    x++;
+                if(x>1){
+                    x--;
                     if(y<8){
                         y++;
                     }else{
@@ -86,6 +90,7 @@ public class Spielverwalter   {
                 }
 
                 if(feld[x][y]==1){
+                    System.out.println("FALSE");
                     return false;
                 }
             }
@@ -95,11 +100,13 @@ public class Spielverwalter   {
         }
 
         //nach unten links prüfen
-        if(checkObenLinks){     
+        if(checkObenLinks){  
+            x = startX;
+            y = startY;    
             for(int i=0;i<8;i++){ // Acht mal, da ggf von (8/8) bis (1/1)
-                if(x<8){
+                if(x>1){
                     x--;
-                    if(y<8){
+                    if(y>1){
                         y--;
                     }else{
                         //Rand erreicht in y
@@ -120,11 +127,13 @@ public class Spielverwalter   {
         }
 
         //nach unten rechts prüfen
-        if(checkUntenLinks){     
+        if(checkUntenLinks){  
+            x = startX;
+            y = startY;    
             for(int i=0;i<8;i++){ // Acht mal, da ggf von (1/8) bis (8/1)
                 if(x<8){
                     x++;
-                    if(y<8){
+                    if(y>1){
                         y--;
                     }else{
                         //Rand erreicht in y
