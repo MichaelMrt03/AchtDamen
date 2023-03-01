@@ -41,7 +41,7 @@ public class Spielverwalter   {
                 if(umbruchzaehler%8==0){
                     System.out.println("");
                 }
-                        System.out.print(feld[x][y]);
+                        System.out.print(" "+feld[x][y]);
                         umbruchzaehler++;
                     
             }
@@ -49,14 +49,14 @@ public class Spielverwalter   {
         System.out.println("");
         versuchszähler++;
         if(versuchszähler>1000){
-            System.out.println("\nEs gibt keine weitere Stellung mehr");
+            System.out.println("\nEs gibt wahrscheinlich keine weitere Stellung mehr");
             break;
         }
       }
     }
 
     private boolean checkDiagonal(int[][] feld,int x, int y) {
-         boolean checkObenRechts=true,checkObenLinks=false,checkUntenRechts=false,checkUntenLinks=false;
+         boolean checkObenRechts=false,checkObenLinks=false,checkUntenRechts=false,checkUntenLinks=false;
         int startX = x;
         int startY = y;
         //nach oben rechts prüfen 1
