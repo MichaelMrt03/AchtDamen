@@ -1,19 +1,20 @@
-import GLOOP.*;
-public class Spielverwalter {
-    public Spielverwalter(){
-        new GLKamera();
-        new GLLicht();
-        new GLQuader(0,0,0,30,30, 30);
-        new Map(); 
 
+
+public class Spielverwalter   {
+    boolean keepRunning;
+    int i=0;
+    public Spielverwalter() {
+       new MyKeyListener("Mein KeyListener");
+        keepRunning=true;
         hauptschleife();  
     }
 
     private void hauptschleife(){
-
+        while(!MyKeyListener.keyPressedESC()){ //Läuft solange bis Escape gedrückt wird
+            System.out.println(i);
+            i++;
+        }
+       
     }
 
-    private void camPosition(){
-        //Kamera Sicht aus der Vogelperspektive auf das Schachbrett
-    }
 }
