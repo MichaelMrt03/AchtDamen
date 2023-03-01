@@ -26,15 +26,24 @@ public class Spielverwalter   {
             //Zufallsposition für eine Dame
             int randomX = (int) (Math.random()*8)+1;
             int randomY = (int) (Math.random()*8)+1;
-    
+            System.out.println("x:"+randomX+" "+"y:"+randomY);
             if(feld[randomX][randomY]==0&&checkDiagonal(feld,randomX,randomY)==true){
-                System.out.println("x: "+randomX+"\n"+"y: "+randomY);
+            
                 feld[randomX][randomY]=1; 
                 positionierteDamen++;
                 System.out.println("\n\nPositionierte Damen: "+positionierteDamen);
             }
             
        // }
+      
+        System.out.println("");
+        versuchszähler++;
+        if(versuchszähler>1000){
+            System.out.println("\nEs gibt wahrscheinlich keine weitere Stellung mehr");
+            break;
+        }
+      }
+        
          //Ausgabe
          int umbruchzaehler=0;
          for(int y=1;y<9;y++){
@@ -47,13 +56,6 @@ public class Spielverwalter   {
                     
             }
         }
-        System.out.println("");
-        versuchszähler++;
-        if(versuchszähler>1000){
-            System.out.println("\nEs gibt wahrscheinlich keine weitere Stellung mehr");
-            break;
-        }
-      }
     }
 
     private boolean checkDiagonal(int[][] feld,int x, int y) {
