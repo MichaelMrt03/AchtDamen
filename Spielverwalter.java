@@ -19,15 +19,26 @@ public class Spielverwalter   {
     }
 
     private void hauptschleife(){
+      for(int i=0;i<2;i++){
             //Zufallsposition für eine Dame
             int randomX = (int) (Math.random()*8)+1;
             int randomY = (int) (Math.random()*8)+1;
-            System.out.println("x:"+randomX+" "+"y:"+randomY);
 
             feld[randomX][randomY] = 1;
             checkDiagonal(feld, randomX, randomY);
-
-  
+      }
+         //Ausgabe
+    int umbruchzaehler=0;
+    for(int y=1;y<9;y++){
+       for(int x=1;x<9;x++){       
+           if(umbruchzaehler%8==0){
+               System.out.println("");
+           }
+                   System.out.print(" "+feld[x][y]);
+                   umbruchzaehler++;
+               
+       }
+   }
     }
 
     private void checkDiagonal(int[][] feld,int x, int y) {
@@ -44,7 +55,9 @@ public class Spielverwalter   {
         y--;
      }
 
-     feld[x][y] = 2;
+     if(feld[x][y]==0){
+      feld[x][y]=2;
+     }
      
     }
 
@@ -61,7 +74,9 @@ public class Spielverwalter   {
        y--;
     }
 
-    feld[x][y] = 2;
+    if(feld[x][y]==0){
+      feld[x][y]=2;
+     }
     
    }
 
@@ -81,7 +96,9 @@ public class Spielverwalter   {
       y++;
    }
 
-   feld[x][y] = 2;
+   if(feld[x][y]==0){
+      feld[x][y]=2;
+     }
   }
 
   //unten rechts
@@ -100,24 +117,15 @@ public class Spielverwalter   {
     y++;
  }
 
- feld[x][y] = 2;
+ if(feld[x][y]==0){
+   feld[x][y]=2;
+  }
  
 }
 
   
 
-    //Ausgabe
-    int umbruchzaehler=0;
-    for( y=1;y<9;y++){
-       for( x=1;x<9;x++){       
-           if(umbruchzaehler%8==0){
-               System.out.println("");
-           }
-                   System.out.print(" "+feld[x][y]);
-                   umbruchzaehler++;
-               
-       }
-   }
+    
 
    }
 }
