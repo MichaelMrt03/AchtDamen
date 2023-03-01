@@ -48,6 +48,64 @@ public class Spielverwalter   {
      
     }
 
+    //oben links
+     x = startX;
+     y = startY;
+
+    while(x!=1&&y!=1){
+    if(x>1){
+       x--;
+    }
+
+    if(y>1){
+       y--;
+    }
+
+    feld[x][y] = 2;
+    
+   }
+
+    //unten links
+    x = startX;
+    y = startY;
+
+   while(x!=8&&y!=8){
+    if(x==1)break;
+    if(y==8)break;
+
+   if(x>1){
+      x--;
+   }
+
+   if(y<8){
+      y++;
+   }
+
+   feld[x][y] = 2;
+  }
+
+  //unten rechts
+  x = startX;
+  y = startY;
+
+ while(x!=8&&y!=8){
+    if(x==8)break;
+    if(y==8)break;
+
+ if(x<8){
+    x++;
+ }
+
+ if(y<8){
+    y++;
+ }
+
+ feld[x][y] = 2;
+ 
+}
+
+  
+
     //Ausgabe
     int umbruchzaehler=0;
     for( y=1;y<9;y++){
