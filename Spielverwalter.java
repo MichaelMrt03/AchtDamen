@@ -3,6 +3,7 @@
 public class Spielverwalter   {
 
     int[][] feld; 
+    boolean checkObenRechts,checkObenLinks;
     public Spielverwalter() {
        new MyKeyListener("Mein KeyListener");
         feld = new int[9][9]; //Damit man das 8*8 Feld mit 1 bis 8 darstellen kann
@@ -25,12 +26,12 @@ public class Spielverwalter   {
             int randomX = (int) (Math.random()*8)+1;
             int randomY = (int) (Math.random()*8)+1;
 
-            if(feld[randomX][randomY]==0){
+            if(feld[randomX][randomY]==0&&checkDiagonal(feld,randomX,randomY)==true){
                 feld[randomX][randomY]=1; 
                 positionierteDamen++;
-                System.out.println("Positionierte Damen: "+positionierteDamen);
+                System.out.println("\n\nPositionierte Damen: "+positionierteDamen);
             }
-           }
+           
        // }
          //Ausgabe
          int umbruchzaehler=0;
@@ -44,6 +45,62 @@ public class Spielverwalter   {
                     
             }
         }
+      }
+    }
+
+    private boolean checkDiagonal(int[][] feld,int x, int y) {
+        //nach oben rechts prüfen
+      for(int i=0;i<8;i++){ // Acht mal, da ggf von (1/8) bis (8/1)
+        if(x<8){
+            x++;
+            if(y<8){
+                y++;
+            }else{
+                //Rand erreicht in y
+                checkObenRechts=true;
+            }
+            }else{
+            //Rand erreicht in x
+            checkObenRechts=true;
+        }
+
+        if(feld[x][y]==1){
+            return false;
+        }
+    }
+
+        if(checkObenRechts){
+               //nach oben rechts prüfen
+      for(int i=0;i<8;i++){ // Acht mal, da ggf von (1/8) bis (8/1)
+        if(x<8){
+            x++;
+            if(y<8){
+                y++;
+            }else{
+                //Rand erreicht in y
+                checkObenLinks=true;
+            }
+            }else{
+            //Rand erreicht in x
+            checkObenLinks=true;
+        }
+
+        if(feld[x][y]==1){
+            return false;
+        }
+    }
+        }else{
+            //Wenn links false ist
+            return false;
+        }
+
+
+        //Temporär
+       if(checkObenRechts&&checkObenLinks){
+        return true;
+       }else{
+        return false;
+       }
     }
 
 }
