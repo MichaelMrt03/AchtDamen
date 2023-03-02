@@ -45,45 +45,38 @@ public class Spielverwalter   {
     }
 
     private boolean checkLine(int[][] feld,int x, int y){
+      int startX = x;
+      int startY = y;
        // rechts 
-     int startX = x;
-     int startY = y;
-
-     while(x!=8){
-            x++;
-            if(feld[x][y]==1){return false;}
-    }
+     do{
+         if(feld[x][y]==1){return false;}
+         x++;
+     }while(x<=8);
 
     // links 2
      x = startX;
      y = startY;
-
-    while(x!=1){
-            x--;
-            if(feld[x][y]==1){return false;} 
-   }
+     do{
+      if(feld[x][y]==1){return false;} 
+      x--;
+     }while(x>=1);
 
     //unten 3
     x = startX;
     y = startY;
+   do{
+      if(feld[x][y]==1){return false;}
+      y++;
+   }while(y<=8);
 
-   while(y!=8){
-      if(y==8)break;
-         y++;
-
-         if(feld[x][y]==1){return false;}
-  }
-
-  //oben
+  //oben 4
   x = startX;
   y = startY;
+  do{
+   if(feld[x][y]==1){return false;}
+   y--;
+  }while(y>=1);
 
- while(y!=1){
-      if(y>1){
-         y--;
-      }
-      if(feld[x][y]==1){return false;}
-   }
       return true;
 }
     
