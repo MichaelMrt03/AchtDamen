@@ -1,5 +1,3 @@
-import java.lang.reflect.Array;
-
 public class Spielverwalter   {
 
    int[][] feld; 
@@ -23,7 +21,6 @@ public class Spielverwalter   {
 
      //  int[][][] gespeicherteLösungen = {feld};
           gespeicherteLösungen = new int[100][][];
-
        
         // gespeicherteLösungen[0] = test;
 
@@ -32,7 +29,7 @@ public class Spielverwalter   {
     }
 
     private void hauptschleife(){
-      while(anzahlLoesungen<3){
+      while(anzahlLoesungen<5){
          while(platzierteDamen<8){
                   //Zufallsposition für eine Dame
                randomX = (int) (Math.random()*8)+1;
@@ -65,9 +62,12 @@ public class Spielverwalter   {
                      umbruchzaehler++;  
          }
       }
+
       
-      anzahlLoesungen++;
-      System.out.println("\n\nLösung Nr:"+anzahlLoesungen);
+      System.out.print("\n"+feldVorgekommen(feld));
+
+      System.out.println("\n\nLösung Nr:"+ ++anzahlLoesungen);
+      anzahlLoesungen--;
       int[][] tempLösung = new int[9][9];
       tempLösung = feld;
       gespeicherteLösungen[anzahlLoesungen] = tempLösung;
@@ -81,7 +81,9 @@ public class Spielverwalter   {
                    System.out.print(" "+ gespeicherteLösungen[anzahlLoesungen][x][y]); 
                    umbruchzaehler++; 
                }
-         }
+         }      
+         anzahlLoesungen++;
+        
 
         
       reset();
@@ -225,9 +227,7 @@ public class Spielverwalter   {
 
    private boolean feldVorgekommen(int[][] feld){
          for(int i=0;i<anzahlLoesungen;i++){
-            if(feld==gespeicherteLösungen[i]){
-               return true;
-            } 
+          
          }
          return  false;
    }
