@@ -1,5 +1,3 @@
-import java.lang.reflect.Array;
-
 public class Spielverwalter   {
 
    int[][] feld; 
@@ -20,14 +18,18 @@ public class Spielverwalter   {
                 feld[x][y]=0;
             }
        }
-
-     //  int[][][] gespeicherteLösungen = {feld};
-          gespeicherteLösungen = new int[100][][];
-
-       
-        // gespeicherteLösungen[0] = test;
-
-
+          gespeicherteLösungen = new int[100][9][9];
+    
+       //fulle lösungen mit nullen
+       /* 
+       for (int i = 0; i < feld.length; i++) {
+         for(int x=1;x<9;x++){
+            for(int y=1;y<9;y++){
+               gespeicherteLösungen[i][x][y] = 0;
+            }
+      } 
+       }*/
+            
       hauptschleife(); 
     }
 
@@ -54,23 +56,20 @@ public class Spielverwalter   {
              //  System.out.print("\nFiguren auf dem Feld:"+ platzierteDamen);
          }
 
-            //Ausgabe
-         umbruchzaehler=0;
-      for(int y=1;y<9;y++){
-         for(int x=1;x<9;x++){       
-            if(umbruchzaehler%8==0){
-                //  System.out.println("");
-            }
-                    // System.out.print(" "+feld[x][y]);
-                     umbruchzaehler++;  
+   
+
+      //Neue Speicherung
+      for(int x=1;x<9;x++){
+         for(int y=1;y<9;y++){
+             gespeicherteLösungen[anzahlLoesungen][x][y] = feld[x][y];
          }
-      }
-      
+    }
+      //Ende neue Speicherung
       anzahlLoesungen++;
       System.out.println("\n\nLösung Nr:"+anzahlLoesungen);
-      int[][] tempLösung = new int[9][9];
-      tempLösung = feld;
-      gespeicherteLösungen[anzahlLoesungen] = tempLösung;
+      
+      gespeicherteLösungen[anzahlLoesungen] = feld;
+      
       //Neue Ausgabe
       
             for(int x=1;x<9;x++){
@@ -86,6 +85,20 @@ public class Spielverwalter   {
         
       reset();
     }//Ende Lösungsschleife
+      System.out.println("\nEnde");
+      for (int i = 0; i < 3; i++) {
+         System.out.print("\nNeue Lös");
+         for(int x=1;x<9;x++){
+            for(int y=1;y<9;y++){
+               if(umbruchzaehler%8==0){
+                  System.out.print("\n");
+            }
+               System.out.print(" "+gespeicherteLösungen[i][x][y]);
+               umbruchzaehler++;
+            }
+      } 
+       }
+
    } //Ende Methode hauptschleife
    
 
