@@ -1,3 +1,5 @@
+import java.time.Year;
+
 public class Spielverwalter   {
 
    int[][] feld; 
@@ -55,9 +57,7 @@ public class Spielverwalter   {
                platzierteDamen++;
              //  System.out.print("\nFiguren auf dem Feld:"+ platzierteDamen);
          }
-
-   
-
+         if(!feldVorgekommen(feld)){
       //Neue Speicherung
       for(int x=1;x<9;x++){
          for(int y=1;y<9;y++){
@@ -68,10 +68,8 @@ public class Spielverwalter   {
       anzahlLoesungen++;
       System.out.println("\n\nLösung Nr:"+anzahlLoesungen);
       
-      
-
-        
-      reset();
+    }
+         reset();
     }//Ende Lösungsschleife
       System.out.println("\nEnde");
       for (int i = 0; i < 3; i++) {
@@ -224,11 +222,15 @@ public class Spielverwalter   {
     }
    }
 
+      //Prüft, ob ein Feld schonmal vorgekommen ist
    private boolean feldVorgekommen(int[][] feld){
          for(int i=0;i<anzahlLoesungen;i++){
-            if(feld==gespeicherteLösungen[i]){
-               return true;
-            } 
+            for(int x=1;x<9;x++){
+               for(int y=1;y<9;y++){
+                  System.out.println(gespeicherteLösungen[i][x][y]+" "+feld[x][y]);
+                 //Hier
+               }
+         }    
          }
          return  false;
    }
