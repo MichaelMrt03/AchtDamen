@@ -1,4 +1,4 @@
-
+import java.lang.reflect.Array;
 
 public class Spielverwalter   {
 
@@ -8,9 +8,12 @@ public class Spielverwalter   {
    int randomY;
    int umbruchzaehler;
    int platzierteDamen;
+   int anzahlLoesungen=0;
+   int[] [][] gespeicherteLösungen;
     public Spielverwalter() {
       // new MyKeyListener("Mein KeyListener");
         feld = new int[9][9]; //Damit man das 8*8 Feld mit 1 bis 8 darstellen kann
+
        //Füllt das Feld mit Nullen
         for(int x=1;x<9;x++){
             for(int y=1;y<9;y++){
@@ -18,11 +21,18 @@ public class Spielverwalter   {
             }
        }
 
-       hauptschleife(); 
+     //  int[][][] gespeicherteLösungen = {feld};
+          gespeicherteLösungen = new int[100][][];
+
+       
+        // gespeicherteLösungen[0] = test;
+
+
+      hauptschleife(); 
     }
 
     private void hauptschleife(){
-
+      while(anzahlLoesungen<3){
          while(platzierteDamen<8){
                   //Zufallsposition für eine Dame
                randomX = (int) (Math.random()*8)+1;
@@ -32,7 +42,7 @@ public class Spielverwalter   {
                      randomY = (int) (Math.random()*8)+1;
                   durchlaeufe++;
                   if(durchlaeufe>1000){
-                     System.out.println("Neuer Versuch");
+                  //   System.out.println("\nNeuer Versuch");
                      reset();
                      continue;
                   }
@@ -41,7 +51,7 @@ public class Spielverwalter   {
                
                feld[randomX][randomY]=1;
                platzierteDamen++;
-               System.out.println("\nFiguren auf dem Feld:"+ platzierteDamen);
+             //  System.out.print("\nFiguren auf dem Feld:"+ platzierteDamen);
          }
 
             //Ausgabe
@@ -49,14 +59,38 @@ public class Spielverwalter   {
       for(int y=1;y<9;y++){
          for(int x=1;x<9;x++){       
             if(umbruchzaehler%8==0){
-                  System.out.println("");
+                //  System.out.println("");
             }
-                     System.out.print(" "+feld[x][y]);
+                    // System.out.print(" "+feld[x][y]);
                      umbruchzaehler++;  
          }
       }
-   }
+      
+      anzahlLoesungen++;
+      System.out.println("\n\nLösung Nr:"+anzahlLoesungen);
+      int[][] tempLösung = new int[9][9];
+      tempLösung = feld;
+      gespeicherteLösungen[anzahlLoesungen] = tempLösung;
+      //Neue Ausgabe
+      
+            for(int x=1;x<9;x++){
+               for(int y=1;y<9;y++){
+                  if(umbruchzaehler%8==0){
+                       System.out.println("");
+                 }
+                   System.out.print(" "+ gespeicherteLösungen[anzahlLoesungen][x][y]); 
+                   umbruchzaehler++; 
+               }
+         }
+
+        
+      reset();
+    }//Ende Lösungsschleife
+   } //Ende Methode hauptschleife
    
+
+
+
     private boolean checkLine(int[][] feld,int x, int y){
       int startX = x;
       int startY = y;
@@ -187,5 +221,14 @@ public class Spielverwalter   {
              feld[x][y]=0;
          }
     }
+   }
+
+   private boolean feldVorgekommen(int[][] feld){
+         for(int i=0;i<anzahlLoesungen;i++){
+            if(feld==gespeicherteLösungen[i]){
+               return true;
+            } 
+         }
+         return  false;
    }
 }
