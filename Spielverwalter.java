@@ -36,7 +36,7 @@ public class Spielverwalter   {
     }
 
     private void hauptschleife(){
-      while(anzahlLoesungen<100){
+      while(anzahlLoesungen<10){
          while(platzierteDamen<8){
                   //Zufallsposition für eine Dame
                randomX = (int) (Math.random()*8)+1;
@@ -57,21 +57,9 @@ public class Spielverwalter   {
                platzierteDamen++;
              //  System.out.print("\nFiguren auf dem Feld:"+ platzierteDamen);
          }
-if(!feldVorgekommen(feld)){
-   /* 
-                  //Ausgabe
-    int umbruchzaehler=0;
-    System.out.print("\n");
-    for(int y=1;y<9;y++){
-       for(int x=1;x<9;x++){       
-           if(umbruchzaehler%8==0){
-               System.out.println("");
-           }
-                   System.out.print(" "+feld[x][y]);
-                   umbruchzaehler++;
-               
-       }
-   } */
+for (int i = 0; i < 8; i++) {
+if(!feldVorgekommen(feld,i)){
+
 
       //Neue Speicherung
       for(int x=1;x<9;x++){
@@ -84,12 +72,11 @@ if(!feldVorgekommen(feld)){
       }else{
          System.out.println("\nEs gab eine Doppelung!");
       }
+   }
 
 
       reset();
     } //Ende Lösungsschleife
-        
-    
       System.out.println("\nEnde");
       for (int i = 0; i < anzahlLoesungen; i++) {
          System.out.print("\nNeue Lös: "+ ++i);
@@ -243,15 +230,14 @@ if(!feldVorgekommen(feld)){
    }
 
       //Prüft, ob ein Feld schonmal vorgekommen ist
-   private boolean feldVorgekommen(int[][] feld){
-         for(int i=0;i<3;i++){
+   private boolean feldVorgekommen(int[][] feld,int posArr){
             for(int x=1;x<9;x++){
                for(int y=1;y<9;y++){
                  // System.out.println(gespeicherteLösungen[i][x][y]+" "+feld[x][y]);
-                  if(gespeicherteLösungen[i][x][y]!=feld[x][y])return false;
+                  if(gespeicherteLösungen[posArr][x][y]!=feld[x][y])return false;
                }
          }    
-         }
+         
          return  true;
    }
 }
