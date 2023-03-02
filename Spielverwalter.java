@@ -18,12 +18,12 @@ public class Spielverwalter   {
     }
 
     private void hauptschleife(){
-      for(int i=1;i<9;i++){
+      for(int i=1;i<5;i++){
             //Zufallsposition für eine Dame
             int randomX = (int) (Math.random()*8)+1;
             int randomY = (int) (Math.random()*8)+1;
 
-          while(!checkDiagonal(feld, randomX, randomY)){
+          while(!checkLine(feld, randomX, randomY)){
             randomX = (int) (Math.random()*8)+1;
             randomY = (int) (Math.random()*8)+1;
           }
@@ -43,6 +43,59 @@ public class Spielverwalter   {
        }
    }
     }
+
+    private boolean checkLine(int[][] feld,int x, int y){
+       // rechts 
+     int startX = x;
+     int startY = y;
+
+     while(x!=8){
+            x++;
+      if(feld[x][y]==1){
+         return false;
+      }
+    }
+
+    // links 2
+     x = startX;
+     y = startY;
+
+    while(x!=1){
+            x--;
+      if(feld[x][y]==1){
+      return false;
+      }  
+   }
+
+    //unten 3
+    x = startX;
+    y = startY;
+
+   while(y!=8){
+      if(y==8)break;
+         y++;
+
+      if(feld[x][y]==1){
+         return false;
+      }
+  }
+
+  //oben
+  x = startX;
+  y = startY;
+
+ while(y!=1){
+      if(y==8)break;
+      if(y>1){
+         y--;
+      }
+      if(feld[x][y]==1){
+         return false;
+      }
+   }
+      return true;
+}
+    
 
     private boolean checkDiagonal(int[][] feld,int x, int y) {
      //oben rechts 1
