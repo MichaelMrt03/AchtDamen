@@ -18,7 +18,7 @@ public class Spielverwalter   {
     }
 
     private void hauptschleife(){
-      for(int i=1;i<5;i++){
+      for(int i=1;i<2;i++){
             //Zufallsposition für eine Dame
             int randomX = (int) (Math.random()*8)+1;
             int randomY = (int) (Math.random()*8)+1;
@@ -51,9 +51,7 @@ public class Spielverwalter   {
 
      while(x!=8){
             x++;
-      if(feld[x][y]==1){
-         return false;
-      }
+            if(feld[x][y]==0){feld[x][y]=2;}
     }
 
     // links 2
@@ -62,9 +60,7 @@ public class Spielverwalter   {
 
     while(x!=1){
             x--;
-      if(feld[x][y]==1){
-      return false;
-      }  
+            if(feld[x][y]==0){feld[x][y]=2;} 
    }
 
     //unten 3
@@ -75,9 +71,7 @@ public class Spielverwalter   {
       if(y==8)break;
          y++;
 
-      if(feld[x][y]==1){
-         return false;
-      }
+         if(feld[x][y]==0){feld[x][y]=2;}
   }
 
   //oben
@@ -85,13 +79,10 @@ public class Spielverwalter   {
   y = startY;
 
  while(y!=1){
-      if(y==8)break;
       if(y>1){
          y--;
       }
-      if(feld[x][y]==1){
-         return false;
-      }
+      if(feld[x][y]==0){feld[x][y]=2;}
    }
       return true;
 }
