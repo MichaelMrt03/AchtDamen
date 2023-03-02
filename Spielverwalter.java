@@ -2,8 +2,11 @@
 
 public class Spielverwalter   {
 
-    int[][] feld; 
-   
+   int[][] feld; 
+   int durchlaeufe=0;
+   int randomX;
+   int randomY;
+   int umbruchzaehler;
     public Spielverwalter() {
       // new MyKeyListener("Mein KeyListener");
         feld = new int[9][9]; //Damit man das 8*8 Feld mit 1 bis 8 darstellen kann
@@ -20,18 +23,22 @@ public class Spielverwalter   {
     private void hauptschleife(){
       for(int i=1;i<9;i++){
             //Zufallsposition für eine Dame
-            int randomX = (int) (Math.random()*8)+1;
-            int randomY = (int) (Math.random()*8)+1;
-
+          randomX = (int) (Math.random()*8)+1;
+          randomY = (int) (Math.random()*8)+1;
+          durchlaeufe=0;
           while(!checkLine(feld, randomX, randomY) || !checkDiagonal(feld, randomX, randomY)){
             randomX = (int) (Math.random()*8)+1;
             randomY = (int) (Math.random()*8)+1;
+            if(durchlaeufe>200){
+               hauptschleife();
+            }
+            durchlaeufe++;
           }
           feld[randomX][randomY]=1;
           System.out.println("\nFiguren auf dem Feld:"+ i);
       }
          //Ausgabe
-    int umbruchzaehler=0;
+      umbruchzaehler=0;
     for(int y=1;y<9;y++){
        for(int x=1;x<9;x++){       
            if(umbruchzaehler%8==0){
