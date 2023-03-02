@@ -23,7 +23,7 @@ public class Spielverwalter   {
             int randomX = (int) (Math.random()*8)+1;
             int randomY = (int) (Math.random()*8)+1;
 
-          while(!checkLine(feld, randomX, randomY)){
+          while(!checkLine(feld, randomX, randomY) || !checkDiagonal(feld, randomX, randomY)){
             randomX = (int) (Math.random()*8)+1;
             randomY = (int) (Math.random()*8)+1;
           }
