@@ -13,161 +13,155 @@ public class Spielverwalter   {
                 feld[x][y]=0;
             }
        }
-     //  System.out.println(feld[4][4]);
 
        hauptschleife(); 
     }
 
     private void hauptschleife(){
-        //while(!MyKeyListener.keyPressedESC()){ //Läuft solange bis Escape gedrückt wird
-          int positionierteDamen=0;
-          int versuchszähler=0;
-            while(positionierteDamen<8){
+      for(int i=1;i<9;i++){
             //Zufallsposition für eine Dame
             int randomX = (int) (Math.random()*8)+1;
             int randomY = (int) (Math.random()*8)+1;
-            System.out.println("x:"+randomX+" "+"y:"+randomY);
-            if(feld[randomX][randomY]==0&&checkDiagonal(feld,randomX,randomY)==true){
-            
-                feld[randomX][randomY]=1; 
-                positionierteDamen++;
-                System.out.println("\n\nPositionierte Damen: "+positionierteDamen);
-            }
-            
-       // }
-      
-        System.out.println("");
-        versuchszähler++;
-        if(versuchszähler>1000){
-            System.out.println("\nEs gibt wahrscheinlich keine weitere Stellung mehr");
-            break;
-        }
+
+          while(!checkLine(feld, randomX, randomY)){
+            randomX = (int) (Math.random()*8)+1;
+            randomY = (int) (Math.random()*8)+1;
+          }
+          feld[randomX][randomY]=1;
+          System.out.println("\nFiguren auf dem Feld:"+ i);
       }
-        
          //Ausgabe
-         int umbruchzaehler=0;
-         for(int y=1;y<9;y++){
-            for(int x=1;x<9;x++){       
-                if(umbruchzaehler%8==0){
-                    System.out.println("");
-                }
-                        System.out.print(" "+feld[x][y]);
-                        umbruchzaehler++;
-                    
-            }
-        }
+    int umbruchzaehler=0;
+    for(int y=1;y<9;y++){
+       for(int x=1;x<9;x++){       
+           if(umbruchzaehler%8==0){
+               System.out.println("");
+           }
+                   System.out.print(" "+feld[x][y]);
+                   umbruchzaehler++;
+               
+       }
+   }
     }
+
+    private boolean checkLine(int[][] feld,int x, int y){
+      int startX = x;
+      int startY = y;
+       // rechts 
+     do{
+         if(feld[x][y]==1){return false;}
+         x++;
+     }while(x<=8);
+
+    // links 2
+     x = startX;
+     y = startY;
+     do{
+      if(feld[x][y]==1){return false;} 
+      x--;
+     }while(x>=1);
+
+    //unten 3
+    x = startX;
+    y = startY;
+   do{
+      if(feld[x][y]==1){return false;}
+      y++;
+   }while(y<=8);
+
+  //oben 4
+  x = startX;
+  y = startY;
+  do{
+   if(feld[x][y]==1){return false;}
+   y--;
+  }while(y>=1);
+
+      return true;
+}
+    
 
     private boolean checkDiagonal(int[][] feld,int x, int y) {
-         boolean checkObenRechts=false,checkObenLinks=false,checkUntenRechts=false,checkUntenLinks=false;
-        int startX = x;
-        int startY = y;
-        //nach oben rechts prüfen 1
-      for(int i=0;i<8;i++){ // Acht mal, da ggf von (1/1) bis (8/8)
-        if(x<8){
-            x++;
-            if(y>1){
-                y--;
-            }else{
-                //Rand erreicht in y
-                checkObenRechts=true;
-            }
-            }else{
-            //Rand erreicht in x
-            checkObenRechts=true;
-        }
+     //oben rechts 1
+     int startX = x;
+     int startY = y;
 
-        if(feld[x][y]==1){
-            return false;
-        }
+     while(x!=8&&y!=1){
+      if(x<8){
+         x++;
+      }
+
+     if(y>1){
+        y--;
+     }
+
+     if(feld[x][y]==1){
+      return false;
+     }
+     
     }
 
-      //nach oben links prüfen 2
-        if(checkObenRechts){   
-            x = startX;
-            y = startY;  
-            for(int i=0;i<8;i++){ // Acht mal, da ggf von (1/8) bis (8/1)
-                if(x>1){
-                    x--;
-                    if(y>1){
-                        y--;
-                    }else{
-                        //Rand erreicht in y
-                        checkObenLinks=true;
-                    }
-                    }else{
-                    //Rand erreicht in x
-                    checkObenLinks=true;
-                }
+    //oben links 2
+     x = startX;
+     y = startY;
 
-                if(feld[x][y]==1){
-                    return false;
-                }
-            }
-        }else{
-            //Wenn links false ist
-            return false;
-        }
+    while(x!=1&&y!=1){
+      if(x>1){
+         x--;
+      }
 
-        //nach unten links prüfen 3
-        if(checkObenLinks){  
-            x = startX;
-            y = startY;    
-            for(int i=0;i<8;i++){ // Acht mal, da ggf von (8/8) bis (1/1)
-                if(x>1){
-                    x--;
-                    if(y<8){
-                        y++;
-                    }else{
-                        //Rand erreicht in y
-                        checkUntenLinks=true;
-                    }
-                    }else{
-                    //Rand erreicht in x
-                    checkUntenLinks=true;
-                }
-
-                if(feld[x][y]==1){
-                    return false;
-                }
-            }
-        }else{
-            //Wenn links false ist
-            return false;
-        }
-
-        //nach unten rechts prüfen 4
-        if(checkUntenLinks){  
-            x = startX;
-            y = startY;    
-            for(int i=0;i<8;i++){ // Acht mal, da ggf von (1/8) bis (8/1)
-                if(x<8){
-                    x++;
-                    if(y<8){
-                        y++;
-                    }else{
-                        //Rand erreicht in y
-                        checkUntenRechts=true;
-                    }
-                    }else{
-                    //Rand erreicht in x
-                    checkUntenRechts=true;
-                }
-
-                if(feld[x][y]==1){
-                    return false;
-                }
-            }
-        }else{
-            //Wenn links false ist
-            return false;
-        }
-
-
-       if(checkObenRechts&&checkObenLinks&&checkUntenLinks&&checkUntenRechts){
-        return true;
-       }else{
-        return false;
-       }
+    if(y>1){
+       y--;
     }
+
+    if(feld[x][y]==1){
+     return false;
+     }
+    
+   }
+
+    //unten links 3
+    x = startX;
+    y = startY;
+
+   while(x!=8&&y!=8){
+    if(x==1)break;
+    if(y==8)break;
+
+   if(x>1){
+      x--;
+   }
+
+   if(y<8){
+      y++;
+   }
+
+   if(feld[x][y]==1){
+      return false;
+     }
+  }
+
+  //unten rechts 4
+  x = startX;
+  y = startY;
+
+ while(x!=8&&y!=8){
+    if(x==8)break;
+    if(y==8)break;
+
+ if(x<8){
+    x++;
+ }
+
+ if(y<8){
+    y++;
+ }
+
+ if(feld[x][y]==1){
+   return false;
+  }
+ 
+}
+   return true;
+   }
 }
