@@ -7,6 +7,7 @@ public class Spielverwalter   {
    int randomX;
    int randomY;
    int umbruchzaehler;
+   int platzierteDamen;
     public Spielverwalter() {
       // new MyKeyListener("Mein KeyListener");
         feld = new int[9][9]; //Damit man das 8*8 Feld mit 1 bis 8 darstellen kann
@@ -21,36 +22,41 @@ public class Spielverwalter   {
     }
 
     private void hauptschleife(){
-      for(int i=1;i<9;i++){
-            //Zufallsposition für eine Dame
-          randomX = (int) (Math.random()*8)+1;
-          randomY = (int) (Math.random()*8)+1;
-          durchlaeufe=0;
-          while(!checkLine(feld, randomX, randomY) || !checkDiagonal(feld, randomX, randomY)){
-            randomX = (int) (Math.random()*8)+1;
-            randomY = (int) (Math.random()*8)+1;
-            if(durchlaeufe>200){
-               hauptschleife();
-            }
-            durchlaeufe++;
-          }
-          feld[randomX][randomY]=1;
-          System.out.println("\nFiguren auf dem Feld:"+ i);
-      }
-         //Ausgabe
-      umbruchzaehler=0;
-    for(int y=1;y<9;y++){
-       for(int x=1;x<9;x++){       
-           if(umbruchzaehler%8==0){
-               System.out.println("");
-           }
-                   System.out.print(" "+feld[x][y]);
-                   umbruchzaehler++;
-               
-       }
-   }
-    }
 
+         while(platzierteDamen<8){
+                  //Zufallsposition für eine Dame
+               randomX = (int) (Math.random()*8)+1;
+               randomY = (int) (Math.random()*8)+1;
+               while(!checkLine(feld, randomX, randomY) || !checkDiagonal(feld, randomX, randomY)){
+                     randomX = (int) (Math.random()*8)+1;
+                     randomY = (int) (Math.random()*8)+1;
+                  durchlaeufe++;
+                  if(durchlaeufe>1000){
+                     System.out.println("Neuer Versuch");
+                     reset();
+                     continue;
+                  }
+               }
+
+               
+               feld[randomX][randomY]=1;
+               platzierteDamen++;
+               System.out.println("\nFiguren auf dem Feld:"+ platzierteDamen);
+         }
+
+            //Ausgabe
+         umbruchzaehler=0;
+      for(int y=1;y<9;y++){
+         for(int x=1;x<9;x++){       
+            if(umbruchzaehler%8==0){
+                  System.out.println("");
+            }
+                     System.out.print(" "+feld[x][y]);
+                     umbruchzaehler++;  
+         }
+      }
+   }
+   
     private boolean checkLine(int[][] feld,int x, int y){
       int startX = x;
       int startY = y;
@@ -170,5 +176,16 @@ public class Spielverwalter   {
  
 }
    return true;
+   }
+
+   private void reset(){
+      durchlaeufe=0;
+      platzierteDamen=0;
+      //Füllt das Feld mit Nullen
+      for(int x=1;x<9;x++){
+         for(int y=1;y<9;y++){
+             feld[x][y]=0;
+         }
+    }
    }
 }
