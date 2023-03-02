@@ -36,7 +36,7 @@ public class Spielverwalter   {
     }
 
     private void hauptschleife(){
-      while(anzahlLoesungen<5){
+      while(anzahlLoesungen<100){
          while(platzierteDamen<8){
                   //Zufallsposition für eine Dame
                randomX = (int) (Math.random()*8)+1;
@@ -57,7 +57,8 @@ public class Spielverwalter   {
                platzierteDamen++;
              //  System.out.print("\nFiguren auf dem Feld:"+ platzierteDamen);
          }
-
+if(!feldVorgekommen(feld)){
+   /* 
                   //Ausgabe
     int umbruchzaehler=0;
     System.out.print("\n");
@@ -70,7 +71,7 @@ public class Spielverwalter   {
                    umbruchzaehler++;
                
        }
-   }
+   } */
 
       //Neue Speicherung
       for(int x=1;x<9;x++){
@@ -80,13 +81,19 @@ public class Spielverwalter   {
     }
       //Ende neue Speicherung
       anzahlLoesungen++;
+      }else{
+         System.out.println("\nEs gab eine Doppelung!");
+      }
+
+
       reset();
     } //Ende Lösungsschleife
         
     
       System.out.println("\nEnde");
       for (int i = 0; i < anzahlLoesungen; i++) {
-         System.out.print("\nNeue Lös");
+         System.out.print("\nNeue Lös: "+ ++i);
+         i--;
          for(int x=1;x<9;x++){
             for(int y=1;y<9;y++){
                if(umbruchzaehler%8==0){
