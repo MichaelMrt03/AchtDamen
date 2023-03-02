@@ -68,19 +68,7 @@ public class Spielverwalter   {
       anzahlLoesungen++;
       System.out.println("\n\nLösung Nr:"+anzahlLoesungen);
       
-      gespeicherteLösungen[anzahlLoesungen] = feld;
       
-      //Neue Ausgabe
-      
-            for(int x=1;x<9;x++){
-               for(int y=1;y<9;y++){
-                  if(umbruchzaehler%8==0){
-                       System.out.println("");
-                 }
-                   System.out.print(" "+ gespeicherteLösungen[anzahlLoesungen][x][y]); 
-                   umbruchzaehler++; 
-               }
-         }
 
         
       reset();
