@@ -20,16 +20,12 @@ public class Spielverwalter   {
             for(int y=1;y<9;y++){
                 feld[x][y]=0;
             }
-       }
-       
-    
-       
-            
+       }   
       hauptschleife(); 
     }
 
     private void hauptschleife(){
-      while(anzahlLoesungen<10){
+      while(anzahlLoesungen<100){
          while(platzierteDamen<8){
                   //Zufallsposition für eine Dame
                randomX = (int) (Math.random()*8)+1;
@@ -51,10 +47,10 @@ public class Spielverwalter   {
          if(feldVorgekommen(feldToString(), anzahlLoesungen)==false){
             Felder[anzahlLoesungen] = feldToString(); //Speichert das Feld
             anzahlLoesungen++;
-           // System.out.println("Lösungen: "+anzahlLoesungen);
+            System.out.println("Lösungen: "+anzahlLoesungen);
             System.out.println(feldToString());
          }else{
-            System.out.println("Es gab eine Doppelung!");
+           // System.out.println("Es gab eine Doppelung!");
          }
          reset();//Resetted das Feld und die platzierten Damen
     } //Ende AnzahlLösungsschleife
@@ -196,7 +192,8 @@ public class Spielverwalter   {
       //Prüft, ob ein Feld schonmal vorgekommen ist
    private boolean feldVorgekommen(String feld,int anzahlLoesungen){
          for (int i = 0; i < anzahlLoesungen; i++) {
-            if(feld.equals(Felder[anzahlLoesungen])){
+          //  if(feld.equals(Felder[anzahlLoesungen])){
+            if(feld.equals(Felder[i])){
                System.out.println("Doppelung");
                return true;
             }
