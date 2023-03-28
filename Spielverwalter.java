@@ -9,28 +9,21 @@ public class Spielverwalter   {
    int umbruchzaehler;
    int platzierteDamen;
    int anzahlLoesungen=0;
-   int[] [][] gespeicherteLösungen;
+   String feldString;
+   String Felder[];
     public Spielverwalter() {
       // new MyKeyListener("Mein KeyListener");
         feld = new int[9][9]; //Damit man das 8*8 Feld mit 1 bis 8 darstellen kann
-
+        Felder = new String[100];
        //Füllt das Feld mit Nullen
         for(int x=1;x<9;x++){
             for(int y=1;y<9;y++){
                 feld[x][y]=0;
             }
        }
-          gespeicherteLösungen = new int[100][9][9];
+       
     
-       //fulle lösungen mit nullen
-       /* 
-       for (int i = 0; i < feld.length; i++) {
-         for(int x=1;x<9;x++){
-            for(int y=1;y<9;y++){
-               gespeicherteLösungen[i][x][y] = 0;
-            }
-      } 
-       }*/
+       
             
       hauptschleife(); 
     }
@@ -51,51 +44,22 @@ public class Spielverwalter   {
                      continue;
                   }
                }
-
-               
                feld[randomX][randomY]=1;
                platzierteDamen++;
-             //  System.out.print("\nFiguren auf dem Feld:"+ platzierteDamen);
          }
-for (int i = 0; i < 8; i++) {
-if(!feldVorgekommen(feld,i)){
-
-
-      //Neue Speicherung
-      for(int x=1;x<9;x++){
-         for(int y=1;y<9;y++){
-             gespeicherteLösungen[anzahlLoesungen][x][y] = feld[x][y];
+         //Stand hier wurden 8 Damen platziert
+         if(feldVorgekommen(feldToString(), anzahlLoesungen)==false){
+            Felder[anzahlLoesungen] = feldToString(); //Speichert das Feld
+            anzahlLoesungen++;
+           // System.out.println("Lösungen: "+anzahlLoesungen);
+            System.out.println(feldToString());
+         }else{
+            System.out.println("Es gab eine Doppelung!");
          }
-    }
-      //Ende neue Speicherung
-      anzahlLoesungen++;
-      }else{
-         System.out.println("\nEs gab eine Doppelung!");
-      }
-   }
-
-
-      reset();
-    } //Ende Lösungsschleife
-      System.out.println("\nEnde");
-      for (int i = 0; i < anzahlLoesungen; i++) {
-         System.out.print("\nNeue Lös: "+ ++i);
-         i--;
-         for(int x=1;x<9;x++){
-            for(int y=1;y<9;y++){
-               if(umbruchzaehler%8==0){
-                  System.out.print("\n");
-            }
-               System.out.print(" "+gespeicherteLösungen[i][x][y]);
-               umbruchzaehler++;
-            }
-      } 
-       }
-
+         reset();//Resetted das Feld und die platzierten Damen
+    } //Ende AnzahlLösungsschleife
    } //Ende Methode hauptschleife
    
-
-
 
     private boolean checkLine(int[][] feld,int x, int y){
       int startX = x;
@@ -230,14 +194,24 @@ if(!feldVorgekommen(feld,i)){
    }
 
       //Prüft, ob ein Feld schonmal vorgekommen ist
-   private boolean feldVorgekommen(int[][] feld,int posArr){
-            for(int x=1;x<9;x++){
-               for(int y=1;y<9;y++){
-                 // System.out.println(gespeicherteLösungen[i][x][y]+" "+feld[x][y]);
-                  if(gespeicherteLösungen[posArr][x][y]!=feld[x][y])return false;
-               }
-         }    
-         
-         return  true;
+   private boolean feldVorgekommen(String feld,int anzahlLoesungen){
+         for (int i = 0; i < anzahlLoesungen; i++) {
+            if(feld.equals(Felder[anzahlLoesungen])){
+               System.out.println("Doppelung");
+               return true;
+            }
+         }
+         return  false;
    }
+
+   private String feldToString(){
+      String ausgabe="";
+      for(int x=1;x<9;x++){
+         for(int y=1;y<9;y++){
+           ausgabe +=  feld[x][y];
+         }
+    }
+      return ausgabe;
+   }
+
 }
