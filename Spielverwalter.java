@@ -14,7 +14,7 @@ public class Spielverwalter   {
     public Spielverwalter() {
       // new MyKeyListener("Mein KeyListener");
         feld = new int[9][9]; //Damit man das 8*8 Feld mit 1 bis 8 darstellen kann
-        Felder = new String[100];
+        Felder = new String[1000];
        //Füllt das Feld mit Nullen
         for(int x=1;x<9;x++){
             for(int y=1;y<9;y++){
@@ -25,7 +25,7 @@ public class Spielverwalter   {
     }
 
     private void hauptschleife(){
-      while(anzahlLoesungen<100){
+      while(anzahlLoesungen<1000){
          while(platzierteDamen<8){
                   //Zufallsposition für eine Dame
                randomX = (int) (Math.random()*8)+1;
@@ -47,8 +47,20 @@ public class Spielverwalter   {
          if(feldVorgekommen(feldToString(), anzahlLoesungen)==false){
             Felder[anzahlLoesungen] = feldToString(); //Speichert das Feld
             anzahlLoesungen++;
-            System.out.println("Lösungen: "+anzahlLoesungen);
-            System.out.println(feldToString());
+            System.out.println("\nLösungen: "+anzahlLoesungen);
+           System.out.println(feldToString());
+
+           for(int x=1;x<9;x++){
+            for(int y=1;y<9;y++){
+               if(umbruchzaehler%8==0){
+                  System.out.print("\n");
+            }
+               System.out.print(" "+feld[x][y]);
+               umbruchzaehler++;
+            }
+      } 
+
+
          }else{
            // System.out.println("Es gab eine Doppelung!");
          }
@@ -194,7 +206,7 @@ public class Spielverwalter   {
          for (int i = 0; i < anzahlLoesungen; i++) {
           //  if(feld.equals(Felder[anzahlLoesungen])){
             if(feld.equals(Felder[i])){
-               System.out.println("Doppelung");
+              // System.out.println("\nDoppelung");
                return true;
             }
          }
