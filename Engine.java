@@ -16,7 +16,7 @@ public class Engine {
             x = (int) (Math.random() * 8);
             y = (int) (Math.random() * 8);
 
-            if (!checkDiagonal(x, y)) {
+            if (!checkLine(x, y) && !checkDiagonal(x, y) && checkFeld(x, y)) {
                 feld[x][y] = 1;
                 platzierteFiguren++;
                 // System.out.println(x + " " + y);
@@ -41,39 +41,43 @@ public class Engine {
         return false;
     }
 
-    //Liefert true zurück, wenn eine Figur bereits auf der Diagonalen steht
+    // Liefert true zurück, wenn eine Figur bereits auf der Diagonalen steht
     public boolean checkDiagonal(int x, int y) {
-        //oben links
-        int x1=x;
-        int y1=y;
-        while(x1>0&&y1>0){
+        // oben links
+        int x1 = x;
+        int y1 = y;
+        while (x1 > 0 && y1 > 0) {
             x1--;
             y1--;
-            if(feld[x1][y1]==1)return true;
+            if (feld[x1][y1] == 1)
+                return true;
         }
-        //unten rechts
-         x1=x;
-         y1=y;
-        while(x1<7&&y1<7){
+        // unten rechts
+        x1 = x;
+        y1 = y;
+        while (x1 < 7 && y1 < 7) {
             x1++;
             y1++;
-            if(feld[x1][y1]==1)return true;
+            if (feld[x1][y1] == 1)
+                return true;
         }
-          //oben rechts
-         x1=x;
-         y1=y;
-        while(x1<7&&y1>0){
+        // oben rechts
+        x1 = x;
+        y1 = y;
+        while (x1 < 7 && y1 > 0) {
             x1++;
             y1--;
-            if(feld[x1][y1]==1)return true;
+            if (feld[x1][y1] == 1)
+                return true;
         }
-         //unten links
-         x1=x;
-         y1=y;
-        while(x1>0&&y1<7){
+        // unten links
+        x1 = x;
+        y1 = y;
+        while (x1 > 0 && y1 < 7) {
             x1--;
             y1++;
-            if(feld[x1][y1]==1)return true;
+            if (feld[x1][y1] == 1)
+                return true;
         }
         return false;
     }
@@ -101,4 +105,11 @@ public class Engine {
         return ausgabe;
     }
 
+    // Überprüft, ob auf dem Feld schon eine Figur steht
+    public boolean checkFeld(int x, int y) {
+        if (feld[x][y] == 1) {
+            return true;
+        }
+        return false;
+    }
 }
