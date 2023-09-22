@@ -19,11 +19,12 @@ public class Engine {
             if (!checkLine(x, y)) {
                 feld[x][y] = 1;
                 platzierteFiguren++;
-                System.out.println(x + " " + y);
+               // System.out.println(x + " " + y);
             }
         } // Ende der Schleife
         System.out.println(arrayAusgabe(feld));
         System.out.println(arrayAusgabe(feld).length());
+        System.out.println(schachbrettAusgabe(feld));
 
     }
 
@@ -40,13 +41,24 @@ public class Engine {
         return false;
     }
 
-    // Gibt einen Array als String aus
-    public String arrayAusgabe(int[][] array) {
+    // Gibt einen die Schachbrettstellen als einen langen einzeiligen String
+    public String arrayAusgabe(int[][] feld) {
         String ausgabe = "";
         for (int i = 0; i < 8; i++) {
             for (int k = 0; k < 8; k++) {
                 ausgabe = ausgabe + feld[i][k];
             }
+        }
+        return ausgabe;
+    }
+    //Gibt die Schachbrettstellung formartiert als String zurück
+    public String schachbrettAusgabe(int[][] feld) {
+        String ausgabe = "";
+        for (int i = 0; i < 8; i++) {
+            for (int k = 0; k < 8; k++) {
+                ausgabe = ausgabe+ " " + feld[i][k];
+            }
+            ausgabe = ausgabe +"\n";
         }
         return ausgabe;
     }
