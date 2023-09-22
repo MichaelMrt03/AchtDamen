@@ -4,32 +4,38 @@ public class Engine {
     int x;
     int y;
     int versuche;
+    String[] stellungen = new String[100];
+    int erreichteStellungen = 0;
+
     public Engine() {
-        setFeld(); //Füllt das Feld mit Nullen
 
-        while (platzierteFiguren < 8) {
-            x = (int) (Math.random() * 8);
-            y = (int) (Math.random() * 8);
+        while (erreichteStellungen < 10) {
+            setFeld(); // Füllt das Feld mit Nullen
+            while (platzierteFiguren < 8) {
+                x = (int) (Math.random() * 8);
+                y = (int) (Math.random() * 8);
 
-            if (!checkLine(x, y) && !checkDiagonal(x, y) && !checkFeld(x, y)) {
-                feld[x][y] = 1;
-                platzierteFiguren++;
-                 System.out.println("Figur Nr:"+platzierteFiguren);
-                 versuche = 0;
+                if (!checkLine(x, y) && !checkDiagonal(x, y) && !checkFeld(x, y)) {
+                    feld[x][y] = 1;
+                    platzierteFiguren++;
+                    System.out.println("Figur Nr:" + platzierteFiguren);
+                    versuche = 0;
+                }
+                versuche++;
+                if (versuche > 1000) {
+                    setFeld();
+                    platzierteFiguren = 0;
+                    System.out.println("Reset");
+                }
+            } // Ende der Schleife
+            //Nur wenn es die Stellung noch nicht gab
+            if (true) {
+                System.out.println("Erreichte Durchgänge:" + erreichteStellungen);
+                erreichteStellungen++;
+                platzierteFiguren = 0;
+                versuche = 0;
             }
-            versuche++;
-            if(versuche>1000){
-                setFeld();
-                platzierteFiguren=0;
-                System.out.println("Reset");
-            }
-        } // Ende der Schleife
-
-
-        System.out.println(arrayAusgabe(feld));
-        System.out.println(arrayAusgabe(feld).length());
-        System.out.println(schachbrettAusgabe(feld));
-
+        }
     }
 
     // Liefert true zurück, wenn eine Figur auf der Linie steht
@@ -117,7 +123,7 @@ public class Engine {
         return false;
     }
 
-    public void setFeld(){
+    public void setFeld() {
         // Feld ausfüllen mit Nullen
         for (int i = 0; i < 8; i++) {
             for (int k = 0; k < 8; k++) {
