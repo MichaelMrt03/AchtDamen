@@ -16,10 +16,10 @@ public class Engine {
             x = (int) (Math.random() * 8);
             y = (int) (Math.random() * 8);
 
-            if (!checkLine(x, y)) {
+            if (!checkDiagonal(x, y)) {
                 feld[x][y] = 1;
                 platzierteFiguren++;
-               // System.out.println(x + " " + y);
+                // System.out.println(x + " " + y);
             }
         } // Ende der Schleife
         System.out.println(arrayAusgabe(feld));
@@ -41,6 +41,43 @@ public class Engine {
         return false;
     }
 
+    //Liefert true zurück, wenn eine Figur bereits auf der Diagonalen steht
+    public boolean checkDiagonal(int x, int y) {
+        //oben links
+        int x1=x;
+        int y1=y;
+        while(x1>0&&y1>0){
+            x1--;
+            y1--;
+            if(feld[x1][y1]==1)return true;
+        }
+        //unten rechts
+         x1=x;
+         y1=y;
+        while(x1<7&&y1<7){
+            x1++;
+            y1++;
+            if(feld[x1][y1]==1)return true;
+        }
+          //oben rechts
+         x1=x;
+         y1=y;
+        while(x1<7&&y1>0){
+            x1++;
+            y1--;
+            if(feld[x1][y1]==1)return true;
+        }
+         //unten links
+         x1=x;
+         y1=y;
+        while(x1>0&&y1<7){
+            x1--;
+            y1++;
+            if(feld[x1][y1]==1)return true;
+        }
+        return false;
+    }
+
     // Gibt einen die Schachbrettstellen als einen langen einzeiligen String
     public String arrayAusgabe(int[][] feld) {
         String ausgabe = "";
@@ -51,14 +88,15 @@ public class Engine {
         }
         return ausgabe;
     }
-    //Gibt die Schachbrettstellung formartiert als String zurück
+
+    // Gibt die Schachbrettstellung formartiert als String zurück
     public String schachbrettAusgabe(int[][] feld) {
         String ausgabe = "";
         for (int i = 0; i < 8; i++) {
             for (int k = 0; k < 8; k++) {
-                ausgabe = ausgabe+ " " + feld[i][k];
+                ausgabe = ausgabe + " " + feld[i][k];
             }
-            ausgabe = ausgabe +"\n";
+            ausgabe = ausgabe + "\n";
         }
         return ausgabe;
     }
