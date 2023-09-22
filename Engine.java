@@ -5,13 +5,7 @@ public class Engine {
     int y;
 
     public Engine() {
-        // Feld ausfüllen mit Nullen
-        for (int i = 0; i < 8; i++) {
-            for (int k = 0; k < 8; k++) {
-                feld[i][k] = 0;
-            }
-        }
-
+        setFeld(); //Füllt das Feld mit Nullen
         while (platzierteFiguren < 8) {
             x = (int) (Math.random() * 8);
             y = (int) (Math.random() * 8);
@@ -111,5 +105,15 @@ public class Engine {
             return true;
         }
         return false;
+    }
+
+    public void setFeld(){
+        // Feld ausfüllen mit Nullen
+        for (int i = 0; i < 8; i++) {
+            for (int k = 0; k < 8; k++) {
+                feld[i][k] = 0;
+            }
+        }
+
     }
 }
