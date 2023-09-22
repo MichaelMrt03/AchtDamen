@@ -15,6 +15,7 @@ public class Engine {
                 feld[x][y] = 1;
                 platzierteFiguren++;
                  System.out.println("Figur Nr:"+platzierteFiguren);
+                 versuche = 0;
             }
             versuche++;
             if(versuche>1000){
