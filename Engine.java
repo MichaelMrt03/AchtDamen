@@ -5,24 +5,26 @@ public class Engine {
     int y;
 
     public Engine() {
-        while (platzierteFiguren < 8) {
-            // Feld ausfüllen mit Nullen
-            for (int i = 0; i < 8; i++) {
-                for (int k = 0; k < 8; k++) {
-                    feld[i][k] = 0;
-                }
+        // Feld ausfüllen mit Nullen
+        for (int i = 0; i < 8; i++) {
+            for (int k = 0; k < 8; k++) {
+                feld[i][k] = 0;
             }
+        }
 
+        while (platzierteFiguren < 8) {
             x = (int) (Math.random() * 8);
             y = (int) (Math.random() * 8);
 
             if (!checkLine(x, y)) {
                 feld[x][y] = 1;
                 platzierteFiguren++;
+                System.out.println(x + " " + y);
             }
-
         } // Ende der Schleife
         System.out.println(arrayAusgabe(feld));
+        System.out.println(arrayAusgabe(feld).length());
+
     }
 
     // Liefert true zurück, wenn eine Figur auf der Linie steht
