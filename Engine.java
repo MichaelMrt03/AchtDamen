@@ -3,19 +3,28 @@ public class Engine {
     int platzierteFiguren = 0;
     int x;
     int y;
-
+    int versuche;
     public Engine() {
         setFeld(); //Füllt das Feld mit Nullen
+
         while (platzierteFiguren < 8) {
             x = (int) (Math.random() * 8);
             y = (int) (Math.random() * 8);
 
-            if (!checkLine(x, y) && !checkDiagonal(x, y) && checkFeld(x, y)) {
+            if (!checkLine(x, y) && !checkDiagonal(x, y) && !checkFeld(x, y)) {
                 feld[x][y] = 1;
                 platzierteFiguren++;
-                // System.out.println(x + " " + y);
+                 System.out.println("Figur Nr:"+platzierteFiguren);
+            }
+            versuche++;
+            if(versuche>1000){
+                setFeld();
+                platzierteFiguren=0;
+                System.out.println("Reset");
             }
         } // Ende der Schleife
+
+
         System.out.println(arrayAusgabe(feld));
         System.out.println(arrayAusgabe(feld).length());
         System.out.println(schachbrettAusgabe(feld));
