@@ -4,12 +4,16 @@ public class Engine {
     int x;
     int y;
     int versuche;
-    String[] stellungen = new String[100];
+    String[] stellungen = new String[1000];
     int erreichteStellungen = 0;
 
     public Engine() {
+        //Speichert alle Stellungen
+        for(int i=0;i<stellungen.length;i++){
+            stellungen[i] = "";
+        }
 
-        while (erreichteStellungen < 10) {
+        while (erreichteStellungen < 1000) {
             setFeld(); // Füllt das Feld mit Nullen
             while (platzierteFiguren < 8) {
                 x = (int) (Math.random() * 8);
@@ -29,12 +33,15 @@ public class Engine {
                 }
             } // Ende der Schleife
             //Nur wenn es die Stellung noch nicht gab
-            if (true) {
+            if (!checkStellung(arrayAusgabe(feld))) {
                 System.out.println("Erreichte Durchgänge:" + erreichteStellungen);
                 erreichteStellungen++;
                 platzierteFiguren = 0;
                 versuche = 0;
             }
+        }
+        for(int i=0;i<10;i++){
+            System.out.println(stellungen[i]);
         }
     }
 
@@ -131,5 +138,17 @@ public class Engine {
             }
         }
 
+    }
+
+    //Überprüft, ob diese Stellung schon mal erreicht wurde
+    //Liefert true zurück, wenn das der Fall ist
+    public boolean checkStellung(String feld){
+        for(int i=0; i<erreichteStellungen+1;i++){
+            if(stellungen[i]==feld){
+                return true;
+            }
+        }
+        stellungen[erreichteStellungen] = feld;
+        return false;
     }
 }
