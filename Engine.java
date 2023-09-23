@@ -8,8 +8,8 @@ public class Engine {
     int erreichteStellungen = 0;
 
     public Engine() {
-        //Speichert alle Stellungen
-        for(int i=0;i<stellungen.length;i++){
+        // Speichert alle Stellungen
+        for (int i = 0; i < stellungen.length; i++) {
             stellungen[i] = "";
         }
 
@@ -22,7 +22,7 @@ public class Engine {
                 if (!checkLine(x, y) && !checkDiagonal(x, y) && !checkFeld(x, y)) {
                     feld[x][y] = 1;
                     platzierteFiguren++;
-                    System.out.println("Figur Nr:" + platzierteFiguren);
+                   // System.out.println("Figur Nr:" + platzierteFiguren);
                     versuche = 0;
                 }
                 versuche++;
@@ -32,7 +32,7 @@ public class Engine {
                     System.out.println("Reset");
                 }
             } // Ende der Schleife
-            //Nur wenn es die Stellung noch nicht gab
+              // Nur wenn es die Stellung noch nicht gab
             if (!checkStellung(arrayAusgabe(feld))) {
                 System.out.println("Erreichte Durchgänge:" + erreichteStellungen);
                 erreichteStellungen++;
@@ -40,7 +40,7 @@ public class Engine {
                 versuche = 0;
             }
         }
-        for(int i=0;i<10;i++){
+        for (int i = 0; i < 10; i++) {
             System.out.println(stellungen[i]);
         }
     }
@@ -140,11 +140,12 @@ public class Engine {
 
     }
 
-    //Überprüft, ob diese Stellung schon mal erreicht wurde
-    //Liefert true zurück, wenn das der Fall ist
-    public boolean checkStellung(String feld){
-        for(int i=0; i<erreichteStellungen+1;i++){
-            if(stellungen[i]==feld){
+    // Überprüft, ob diese Stellung schon mal erreicht wurde
+    // Liefert true zurück, wenn das der Fall ist
+    public boolean checkStellung(String feld) {
+        for (int i = 0; i < 100; i++) {
+            if (stellungen[i] == feld) {
+                System.out.println("STELLUNG BEREITS VORHANDEN");
                 return true;
             }
         }
