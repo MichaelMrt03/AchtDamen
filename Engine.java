@@ -4,8 +4,10 @@ public class Engine {
     int x;
     int y;
     int versuche;
-    String[] stellungen = new String[1000];
+    String[] stellungen = new String[100];
     int erreichteStellungen = 0;
+    int doppelungen = 0;
+    int resetNr = 0;
 
     public Engine() {
         // Speichert alle Stellungen
@@ -13,8 +15,8 @@ public class Engine {
             stellungen[i] = "";
         }
 
-        while (erreichteStellungen < 1000) {
-            setFeld(); // Füllt das Feld mit Nullen
+        while (erreichteStellungen < 100) {
+            reset(); // Füllt das Feld mit Nullen
             while (platzierteFiguren < 8) {
                 x = (int) (Math.random() * 8);
                 y = (int) (Math.random() * 8);
@@ -22,27 +24,31 @@ public class Engine {
                 if (!checkLine(x, y) && !checkDiagonal(x, y) && !checkFeld(x, y)) {
                     feld[x][y] = 1;
                     platzierteFiguren++;
-                   // System.out.println("Figur Nr:" + platzierteFiguren);
+                    // System.out.println("Figur Nr:" + platzierteFiguren);
                     versuche = 0;
                 }
                 versuche++;
                 if (versuche > 1000) {
-                    setFeld();
-                    platzierteFiguren = 0;
-                    System.out.println("Reset");
+                    reset();
+                    // System.out.println("Reset: NR"+ ++resetNr);
                 }
             } // Ende der Schleife
-              // Nur wenn es die Stellung noch nicht gab
+
+            // Nur wenn es die Stellung noch nicht gab
             if (!checkStellung(arrayAusgabe(feld))) {
-                System.out.println("Erreichte Durchgänge:" + erreichteStellungen);
                 erreichteStellungen++;
+                System.out.println("Erreichte Stellungen:" + erreichteStellungen);
                 platzierteFiguren = 0;
                 versuche = 0;
+            } else { // Ansonsten neue suchen
+                reset();
+                // System.out.println("Reset: NR"+ ++resetNr);
             }
         }
         for (int i = 0; i < 10; i++) {
-            System.out.println(stellungen[i]);
+            // System.out.println(stellungen[i]);
         }
+
     }
 
     // Liefert true zurück, wenn eine Figur auf der Linie steht
@@ -130,26 +136,39 @@ public class Engine {
         return false;
     }
 
-    public void setFeld() {
+    // Setzt das Brett zurück und die platzierten Figuren
+    public void reset() {
         // Feld ausfüllen mit Nullen
         for (int i = 0; i < 8; i++) {
             for (int k = 0; k < 8; k++) {
                 feld[i][k] = 0;
             }
         }
-
+        platzierteFiguren = 0;
+        versuche = 0;
     }
 
     // Überprüft, ob diese Stellung schon mal erreicht wurde
     // Liefert true zurück, wenn das der Fall ist
     public boolean checkStellung(String feld) {
-        for (int i = 0; i < 100; i++) {
-            if (stellungen[i] == feld) {
-                System.out.println("STELLUNG BEREITS VORHANDEN");
+        for (int i = 0; i < erreichteStellungen; i++) {
+            if (stellungen[i].equals(feld)) {
+                // System.out.println("STELLUNG BEREITS VORHANDEN");
                 return true;
             }
         }
         stellungen[erreichteStellungen] = feld;
         return false;
+    }
+
+    // Findet doppelte Werte innerhalb eines Arrays
+    public void checkClones(String[] array) {
+        for (int i = 0; i < array.length; i++) {
+            for (int j = 0; j < array.length; j++) {
+                if (array[i] == array[j]) {
+                    doppelungen++;
+                }
+            }
+        }
     }
 }
