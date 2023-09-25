@@ -5,7 +5,7 @@ public class Schachbrett {
     JFrame frame;
     JPanel schachbrett;
     JLabel dame;
-    JLabel damen[];
+
     int index = 0;
 
     public Schachbrett() {
@@ -16,35 +16,38 @@ public class Schachbrett {
         frame.setVisible(true);
         frame.setLocationRelativeTo(null); // zentriert
         erzeugeSchachbrett();
-        
-        ImageIcon dameIcon = new ImageIcon("bilder/dame.png");
-        damen = new JLabel[9];
-        for (int i = 0; i < 9; i++) {
-            damen[i] = new JLabel(dameIcon);
-        }
 
-        String s = Engine.stellungen[0];
-        System.out.println(s);
-        stellungEinlesen(s);
-
+        // String s = Engine.stellungen[0];
+        // System.out.println(s);
+        stellungEinlesen(Engine.stellungen[index]);
 
         JButton removeButton = new JButton("Entfernen");
-       //  frame.add(removeButton, BorderLayout.SOUTH);
+        // frame.add(removeButton, BorderLayout.SOUTH);
 
         removeButton.addActionListener(e -> {
             damenEntfernen();
         });
 
+        //Nächste Stellung
         JButton rechtsButton = new JButton("=>");
         frame.add(rechtsButton, BorderLayout.EAST);
-        rechtsButton.addActionListener(e ->{
-            
+        rechtsButton.addActionListener(e -> {
+            if(index<92){
+                damenEntfernen();
+                stellungEinlesen(Engine.stellungen[++index]);
+                 System.out.println("Stellung Nummer: "+index);
+            }
         });
 
+        //Letze Stellung
         JButton linksButton = new JButton("<=");
         frame.add(linksButton, BorderLayout.WEST);
-        linksButton.addActionListener(e ->{
-
+        linksButton.addActionListener(e -> {
+            if(index>0){
+                damenEntfernen();
+                stellungEinlesen(Engine.stellungen[--index]);
+                  System.out.println("Stellung Nummer: "+index);
+            }
         });
 
         frame.setVisible(true);
@@ -70,16 +73,17 @@ public class Schachbrett {
         frame.setVisible(true);
     }
 
-    // Platziert eine Dame auf den Index
+    // Platziert eine Dame auf die Koordinaten
     public void platziereDame(int zeile, int spalte) {
+        ImageIcon dameIcon = new ImageIcon("bilder/dame.png");
+        dame = new JLabel(dameIcon);
         JPanel zielQuadrat = (JPanel) schachbrett.getComponent(zeile * 8 + spalte);
-        zielQuadrat.add(damen[index]);
-        index++;
+        zielQuadrat.add(dame);
         frame.getContentPane().add(schachbrett);
         frame.setVisible(true);
     }
 
-    // Liest die Stellung ein und ermittelt wo Damen platziert werden müssen
+    // Liest die Stellung ein -> platziert 8 Damen
     public void stellungEinlesen(String stellung) {
         int x = 0;
         int y = 0;
@@ -99,12 +103,12 @@ public class Schachbrett {
         }
     }
 
+    //Entfernt alle Damen
     public void damenEntfernen() {
-        System.out.println("Damen entfernt");
-            frame.remove(schachbrett);
-            frame.revalidate();
-            frame.repaint();
-            erzeugeSchachbrett();
+        frame.remove(schachbrett);
+        frame.revalidate();
+        frame.repaint();
+        erzeugeSchachbrett();
     }
 
 }
