@@ -27,12 +27,26 @@ public class Schachbrett {
         System.out.println(s);
         stellungEinlesen(s);
 
+
         JButton removeButton = new JButton("Entfernen");
+       //  frame.add(removeButton, BorderLayout.SOUTH);
+
         removeButton.addActionListener(e -> {
             damenEntfernen();
         });
 
-        frame.add(removeButton, BorderLayout.SOUTH);
+        JButton rechtsButton = new JButton("=>");
+        frame.add(rechtsButton, BorderLayout.EAST);
+        rechtsButton.addActionListener(e ->{
+            
+        });
+
+        JButton linksButton = new JButton("<=");
+        frame.add(linksButton, BorderLayout.WEST);
+        linksButton.addActionListener(e ->{
+
+        });
+
         frame.setVisible(true);
 
     }
