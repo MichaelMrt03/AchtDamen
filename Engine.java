@@ -4,7 +4,7 @@ public class Engine {
     int x;
     int y;
     int versuche;
-    String[] stellungen = new String[100];
+    static String[] stellungen = new String[100];
     int erreichteStellungen = 0;
     int doppelungen = 0;
     int resetNr = 0;
@@ -15,7 +15,7 @@ public class Engine {
             stellungen[i] = "";
         }
 
-        while (erreichteStellungen < 100) {
+        while (erreichteStellungen < 92) {
             reset(); // Füllt das Feld mit Nullen
             while (platzierteFiguren < 8) {
                 x = (int) (Math.random() * 8);
