@@ -10,19 +10,21 @@ public class Schachbrett {
         frame.setVisible(true);
         frame.setLocationRelativeTo(null); // zentriert
 
-        JPanel schachbrett = new JPanel(new GridLayout(1, 2));
+        JPanel schachbrett = new JPanel(new GridLayout(8, 8));
 
-        JPanel quadrat1 = new JPanel();
-        JPanel quadrat2 = new JPanel();
-
-        quadrat1.setBackground(Color.BLACK);
-        quadrat2.setBackground(Color.WHITE);
-
-        schachbrett.add(quadrat1);
-        schachbrett.add(quadrat2);
+        for (int spalte = 0; spalte < 8; spalte++) {
+            for (int zeile = 0; zeile < 8; zeile++) {
+                JPanel quadrat = new JPanel();
+                if ((spalte + zeile) % 2 == 0) { // Gerade Zahl
+                    quadrat.setBackground(Color.WHITE);
+                } else {
+                    quadrat.setBackground(Color.BLACK);
+                }
+                schachbrett.add(quadrat);
+            }
+        }
 
         frame.add(schachbrett);
 
     }
-
 }
