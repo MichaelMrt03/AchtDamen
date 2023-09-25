@@ -4,6 +4,9 @@ import javax.swing.*;
 public class Schachbrett {
     JFrame frame;
     JPanel schachbrett;
+    JLabel dame;
+    JLabel damen[];
+    int index = 0;
 
     public Schachbrett() {
         frame = new JFrame();
@@ -13,10 +16,24 @@ public class Schachbrett {
         frame.setVisible(true);
         frame.setLocationRelativeTo(null); // zentriert
         erzeugeSchachbrett();
+        
+        ImageIcon dameIcon = new ImageIcon("bilder/dame.png");
+        damen = new JLabel[9];
+        for (int i = 0; i < 9; i++) {
+            damen[i] = new JLabel(dameIcon);
+        }
 
         String s = Engine.stellungen[0];
         System.out.println(s);
         stellungEinlesen(s);
+
+        JButton removeButton = new JButton("Entfernen");
+        removeButton.addActionListener(e -> {
+            damenEntfernen();
+        });
+
+        frame.add(removeButton, BorderLayout.SOUTH);
+        frame.setVisible(true);
 
     }
 
@@ -36,16 +53,14 @@ public class Schachbrett {
             }
         }
         frame.add(schachbrett);
+        frame.setVisible(true);
     }
 
     // Platziert eine Dame auf den Index
     public void platziereDame(int zeile, int spalte) {
-        ImageIcon dameIcon = new ImageIcon("bilder/dame.png"); // Passe den Pfad zur Bilddatei an
-        JLabel dame = new JLabel(dameIcon);
-
         JPanel zielQuadrat = (JPanel) schachbrett.getComponent(zeile * 8 + spalte);
-        zielQuadrat.add(dame);
-
+        zielQuadrat.add(damen[index]);
+        index++;
         frame.getContentPane().add(schachbrett);
         frame.setVisible(true);
     }
@@ -55,18 +70,27 @@ public class Schachbrett {
         int x = 0;
         int y = 0;
         for (int i = 0; i < stellung.length(); i++) {
-            //Ermittelt die Koordinaten
+
+            if (stellung.charAt(i) == '1') {
+                // Dame platzieren
+                platziereDame(x, y);
+
+            }
+            // Ermittelt die Koordinaten
             if (x % 7 == 0) {
                 y++;
             } else {
                 x++;
             }
-
-            if (stellung.charAt(i) == '1') {
-                // Dame platzieren
-                platziereDame(x, y);
-              
-            }
         }
     }
+
+    public void damenEntfernen() {
+        System.out.println("Damen entfernt");
+            frame.remove(schachbrett);
+            frame.revalidate();
+            frame.repaint();
+            erzeugeSchachbrett();
+    }
+
 }

@@ -33,11 +33,13 @@ public class Engine {
                     // System.out.println("Reset: NR"+ ++resetNr);
                 }
             } // Ende der Schleife
-
+            if(erreichteStellungen==0){
+                System.out.println(schachbrettAusgabe(feld));
+            }
             // Nur wenn es die Stellung noch nicht gab
             if (!checkStellung(arrayAusgabe(feld))) {
                 erreichteStellungen++;
-                System.out.println("Erreichte Stellungen:" + erreichteStellungen);
+                //System.out.println("Erreichte Stellungen:" + erreichteStellungen);
                 platzierteFiguren = 0;
                 versuche = 0;
             } else { // Ansonsten neue suchen
