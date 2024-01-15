@@ -4,7 +4,7 @@ public class Engine {
     int x;
     int y;
     int versuche;
-    String[] stellungen = new String[100];
+    static String[] stellungen = new String[100];
     int erreichteStellungen = 0;
     int doppelungen = 0;
     int resetNr = 0;
@@ -15,7 +15,7 @@ public class Engine {
             stellungen[i] = "";
         }
 
-        while (erreichteStellungen < 100) {
+        while (erreichteStellungen < 92) {
             reset(); // Füllt das Feld mit Nullen
             while (platzierteFiguren < 8) {
                 x = (int) (Math.random() * 8);
@@ -33,11 +33,13 @@ public class Engine {
                     // System.out.println("Reset: NR"+ ++resetNr);
                 }
             } // Ende der Schleife
-
+            if(erreichteStellungen==0){
+                System.out.println(schachbrettAusgabe(feld));
+            }
             // Nur wenn es die Stellung noch nicht gab
             if (!checkStellung(arrayAusgabe(feld))) {
                 erreichteStellungen++;
-                System.out.println("Erreichte Stellungen:" + erreichteStellungen);
+                //System.out.println("Erreichte Stellungen:" + erreichteStellungen);
                 platzierteFiguren = 0;
                 versuche = 0;
             } else { // Ansonsten neue suchen

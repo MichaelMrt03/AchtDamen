@@ -1,35 +1,28 @@
+import javax.swing.*;
+import java.awt.*;
+
 public class Test {
-  static int doppelungen = 0;
+    public static void main(String[] args) {
+        JFrame frame = new JFrame("JLabel entfernen Beispiel");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setSize(300, 200);
+        ImageIcon dameIcon = new ImageIcon("bilder/dame.png");
+        JPanel panel = new JPanel();
+        JLabel label = new JLabel(dameIcon);
+         JLabel label2 = new JLabel(dameIcon);
+        panel.add(label);
+         panel.add(label2);
 
-  public static void main(String[] args) {
-    String s[] = new String[10];
-    for (int i = 0; i < s.length; i++) {
-      s[i] = "";
-    }
-    for (int i = 0; i < s.length; i++) {
-      for (int j = 0; j < 3; j++) {
-        s[i] = s[i] + Integer.toString((int) (Math.random() * 2));
-      }
-    }
-    arrayAusgabe(s);
-    checkClones(s);
-  }
+        JButton removeButton = new JButton("Entfernen");
+        frame.add(panel, BorderLayout.CENTER);
+        frame.add(removeButton, BorderLayout.SOUTH);
+        frame.setVisible(true);
 
-  public static void checkClones(String[] array) {
-    for (int i = 0; i < array.length; i++) {
-      for (int j = 0; j < array.length; j++) {
-        if (i != j) {
-          if (array[i].equals( array[j])) {
-            System.out.println("DOPPELUNG GEFUNDEN! NR" + ++doppelungen);
-          }
-        }
-      }
-    }
-  }
+        removeButton.addActionListener(e -> {
+            panel.remove(label);
+            panel.revalidate();
+            panel.repaint();
+        });
 
-  public static void arrayAusgabe(String[] array) {
-    for (int i = 0; i < array.length; i++) {
-      System.out.println(array[i]);
     }
-  }
 }
